@@ -1,7 +1,7 @@
-import Collector from './collector.js';
-import Bridge from './bridge.js';
-import Exporter from './exporter.js';
-import Registry from './registry.js';
+import Collector from 'src/collector.js';
+import Bridge from 'src/bridge.js';
+import Exporter from 'src/exporter.js';
+import Registry from 'src/registry.js';
 const exporter_package = require('../package.json');
 
 try {

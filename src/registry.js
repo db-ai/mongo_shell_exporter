@@ -1,4 +1,4 @@
-import Metric from './metric.js';
+import Metric from 'src/metric.js';
 
 export default class Registry {
   constructor(bridge, prefix = "") {
