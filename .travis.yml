@@ -7,7 +7,7 @@ jobs:
   - stage: Running tests
     script: echo "Beep-bop, there is no tests yet! *shame*"
   - stage: Building & Releasing on GitHub
-    script: npm build
+    script: npm run build
     deploy:
       provider: releases
       token:
