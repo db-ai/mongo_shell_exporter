@@ -20,6 +20,6 @@
     "webpack-cli": "^3.3.11"
   },
   "standard": {
-    "globals": ["db", "version", "print", "quit", "NumberLong"]
+    "globals": ["db", "rs", "version", "print", "printjson", "quit", "NumberLong"]
   }
 }
