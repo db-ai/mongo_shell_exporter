@@ -20,6 +20,7 @@ dist
 !.gitattributes
 !.github
 !.gitignore
+!.travis.yml
 !.gitkeep
 !.mailmap
 !.nycrc
