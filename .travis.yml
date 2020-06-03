@@ -7,15 +7,15 @@ dist: xenial
 jobs:
   include:
     - stage: Run tests
-    script: npm test
+      script: npm test
     - stage: Building & Releasing on GitHub
-    script: npm run build
-    deploy:
-      edge: true
-      provider: releases
-      token:
-        secure: CBaOB4+mjQ+3CycPyv37Hfce7/Uq/V7CCtEq8EGg/NNQfP8+3u0VWE9mfgtD1iRcHLCPsO0Ntk4Fkqf4ZDvzgCyr9/adN318Dt7P5LbZMt3Pn9+G/SDFz/JkwiJitu+kHwlJpGwNuR4iREL+gOy0tcG25cf70W2xxh4Qg4Qze+0RjOe55Fze42XKZUPYRN74Jo5EDq82d4BLHLbf0GrDn57P5do27l/39h6dPrcR7IusX6R3naDBJ6OSNR4qJpk/LvKJcJ/aqxz7ZIdrwa9swVVMOq+td3K+7567OLvXE6L+ug/p4hdh8V/KI+LSpiLlybch7KxFcglCOIw4KF23eyiGcnwPtGVMlx6UHBRA35U3W6Db4LSCqeinAyQMIRSBzGoQXh7agCr6YFSxo6xh0HRbnwxNc688pA67Ddt1Fnj4gItQZv941XYlEHF6+PWeR5GoT+7eGbK3yv8W2nnK5+pO/DCHO1GU4M5Y50dGTw+GK8Qu/WE7nFTh5j4D2HyLmzDuaBM75+B7tJPxtIkOg2BrI0hjNei1/+3L2A/H7gu/8UZFdcrmhFB4u0hrTgb1g4pKdR4Cyh83ubv6r183HxucUtLyRi/EoA49kAaOgMJalG5qD8MzrDVUJLpyj+D0rVUpOFQcN169kk/wCjFncE0KviT431RSwZxN+SXTnmw=
-      file: dist/mongo_exporter.js
-      on:
-        tags: true
-        repo: db-ai/mongo_shell_exporter
+      script: npm run build
+      deploy:
+        edge: true
+        provider: releases
+        token:
+          secure: CBaOB4+mjQ+3CycPyv37Hfce7/Uq/V7CCtEq8EGg/NNQfP8+3u0VWE9mfgtD1iRcHLCPsO0Ntk4Fkqf4ZDvzgCyr9/adN318Dt7P5LbZMt3Pn9+G/SDFz/JkwiJitu+kHwlJpGwNuR4iREL+gOy0tcG25cf70W2xxh4Qg4Qze+0RjOe55Fze42XKZUPYRN74Jo5EDq82d4BLHLbf0GrDn57P5do27l/39h6dPrcR7IusX6R3naDBJ6OSNR4qJpk/LvKJcJ/aqxz7ZIdrwa9swVVMOq+td3K+7567OLvXE6L+ug/p4hdh8V/KI+LSpiLlybch7KxFcglCOIw4KF23eyiGcnwPtGVMlx6UHBRA35U3W6Db4LSCqeinAyQMIRSBzGoQXh7agCr6YFSxo6xh0HRbnwxNc688pA67Ddt1Fnj4gItQZv941XYlEHF6+PWeR5GoT+7eGbK3yv8W2nnK5+pO/DCHO1GU4M5Y50dGTw+GK8Qu/WE7nFTh5j4D2HyLmzDuaBM75+B7tJPxtIkOg2BrI0hjNei1/+3L2A/H7gu/8UZFdcrmhFB4u0hrTgb1g4pKdR4Cyh83ubv6r183HxucUtLyRi/EoA49kAaOgMJalG5qD8MzrDVUJLpyj+D0rVUpOFQcN169kk/wCjFncE0KviT431RSwZxN+SXTnmw=
+        file: dist/mongo_exporter.js
+        on:
+          tags: true
+          repo: db-ai/mongo_shell_exporter
