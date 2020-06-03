@@ -1,4 +1,6 @@
-class Registry {
+import Metric from './metric.js';
+
+export default class Registry {
   constructor(bridge, prefix = "") {
     this.bridge = bridge;
     this.all = {};
