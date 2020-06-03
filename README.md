@@ -2,6 +2,25 @@
 
 Zero-dependency Prometheus exporter for MongoDB.
 
+Features:
+
+* No dependencies
+* Collection & Index level metric export
+* Replica Set support
+
+Planned features:
+
+* Sharded Cluster support
+* Select metrics to be exported
+* Selection of databases and collection to be exported
+* More metrics!
+
+Supported MongoDB Versions:
+
+* 4.2.6+
+
+It might work with other versions
+
 ## Usage
 
 Just download mongo_exporter.js from Releases and run it with `mongo` shell.
@@ -10,6 +29,8 @@ Just download mongo_exporter.js from Releases and run it with `mongo` shell.
 2. `mongo --quiet mongo_exporter.js`
 
 You can pass other options, like authentication, port, host or connection uri as usual.
+
+If you are exporting data from Replica Set, most appropriate strategy is to deploy [Script Exporter](#script-exporter-recommended) on each node. Use `localhost` connection, to ensure that your are making direct connection.
 
 ## Access control
 
@@ -29,7 +50,7 @@ If you use [Authentication](https://docs.mongodb.com/manual/core/authentication/
 and then you can run exporter with new credentials:
 
 ```
-  mongo --quiet mongo_exporter.js --username mongodb_exporter --password`
+  mongo --quiet mongo_exporter.js --username mongodb_exporter --password
 ```
 
 ## Exporiting to Prometheus
