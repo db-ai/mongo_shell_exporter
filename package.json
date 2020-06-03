@@ -1,6 +1,6 @@
 {
   "name": "mongo_exporter",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Mongo Prometheus Exporter running in mongo-shell",
   "privtee": true,
   "directories": {
