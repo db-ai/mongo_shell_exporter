@@ -4,8 +4,6 @@ import Exporter from 'src/exporter.js'
 import Registry from 'src/registry.js'
 const exporterPackage = require('../package.json')
 
-/* eslint-disable no-undef */
-
 try {
   const bridge = new Bridge()
   const registry = new Registry(bridge, 'mongo_')

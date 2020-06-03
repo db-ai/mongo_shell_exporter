@@ -98,7 +98,7 @@ export default class Rule {
         break
       case 'object':
         switch (value.constructor) {
-          case NumberLong: // eslint-disable-line no-undef
+          case NumberLong:
             returnValue = Number(value)
             break
         }

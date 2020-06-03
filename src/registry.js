@@ -52,10 +52,10 @@ export default class Registry {
 
       if (seenKeys[metricName] === undefined) {
         seenKeys[metricName] = true
-        print(element.banner) // eslint-disable-line no-undef
+        print(element.banner)
       }
 
-      print(element.metric) // eslint-disable-line no-undef
+      print(element.metric)
     }
   }
 }
