@@ -6,7 +6,9 @@ dist: xenial
 
 jobs:
   include:
-  - stage: Building & Releasing on GitHub
+    - stage: Run tests
+    script: npm test
+    - stage: Building & Releasing on GitHub
     script: npm run build
     deploy:
       edge: true
