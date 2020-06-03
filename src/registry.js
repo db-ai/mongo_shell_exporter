@@ -1,61 +1,61 @@
-import Metric from 'src/metric.js';
+import Metric from 'src/metric.js'
 
 export default class Registry {
-  constructor(bridge, prefix = "") {
-    this.bridge = bridge;
-    this.all = {};
-    this.prefix = prefix;
+  constructor (bridge, prefix = '') {
+    this.bridge = bridge
+    this.all = {}
+    this.prefix = prefix
   }
 
-  writeProbe(probe_name, runtime, is_error, labels = {}) {
-    const context = Object.merge({probe: probe_name}, labels);
+  writeProbe (probeName, runtime, isError, labels = {}) {
+    const context = Object.merge({ probe: probeName }, labels)
 
-    this.write("probe_duration_seconds", runtime, context);
+    this.write('probe_duration_seconds', runtime, context)
 
-    if(is_error != null) {
-      this.write("probe_ok", 0, context);
-      return true;
+    if (isError != null) {
+      this.write('probe_ok', 0, context)
+      return true
     }
   }
 
-  parse(object, context = {}) {
-    this.bridge.parse(object, this, context);
+  parse (object, context = {}) {
+    this.bridge.parse(object, this, context)
   }
 
-  write(key, value, context = {}) {
-    const object = {};
-    object[key] = value;
+  write (key, value, context = {}) {
+    const object = {}
+    object[key] = value
 
-    this.parse(object, context);
+    this.parse(object, context)
   }
 
-  add(type, metric_name, help, labels = {}, value, timestamp) {
-    const metric = this.fetch(type, metric_name, help, labels);
+  add (type, metricName, help, labels = {}, value, timestamp) {
+    const metric = this.fetch(type, metricName, help, labels)
 
-    metric.value = value;
-    metric.timestamp = timestamp;
+    metric.value = value
+    metric.timestamp = timestamp
 
-    this.all[metric.identity] = metric;
+    this.all[metric.identity] = metric
   }
 
-  fetch(type, metric_name, help, labels) {
-    metric_name = [this.prefix, metric_name].join("");
-    return new Metric(type, metric_name, help, labels);
+  fetch (type, metricName, help, labels) {
+    metricName = [this.prefix, metricName].join('')
+    return new Metric(type, metricName, help, labels)
   }
 
-  output() {
-    const seen_keys = {};
+  output () {
+    const seenKeys = {}
 
     for (const key in this.all) {
-      const element = this.all[key];
-      const metric_name = element.name;
+      const element = this.all[key]
+      const metricName = element.name
 
-      if(seen_keys[metric_name] == undefined) {
-        seen_keys[metric_name] = true;
-        print(element.banner);
+      if (seenKeys[metricName] === undefined) {
+        seenKeys[metricName] = true
+        print(element.banner) // eslint-disable-line no-undef
       }
 
-      print(element.metric);
+      print(element.metric) // eslint-disable-line no-undef
     }
   }
 }

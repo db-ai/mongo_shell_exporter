@@ -1,19 +1,19 @@
-import Rule from "src/rule.js";
+import Rule from 'src/rule.js'
 export default class EachKeyAsLabeledMetric extends Rule {
-  match() {
-    this.rawObject = this.cutKey(this.rule.path);
+  match () {
+    this.rawObject = this.cutKey(this.rule.path)
 
-    if (this.rawObject != undefined) return true;
+    if (this.rawObject !== undefined) return true
   }
 
-  call() {
+  call () {
     for (const key in this.rawObject) {
-      if (this.rawObject.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(this.rawObject, key)) {
         const labels = {}
-        const rawValue = this.rawObject[key];
-        const [, value] = this.normalizedValue(rawValue);
+        const rawValue = this.rawObject[key]
+        const [, value] = this.normalizedValue(rawValue)
 
-        labels[this.rule.label_name] = key;
+        labels[this.rule.label_name] = key
 
         this.addMetric(value, labels)
       }

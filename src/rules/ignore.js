@@ -1,23 +1,21 @@
-import Rule from "src/rule.js";
+import Rule from 'src/rule.js'
 export default class Ignore extends Rule {
-  match() {
-    let anyMatch = false;
+  match () {
+    let anyMatch = false
 
     for (const keyPath of this.rule.paths) {
-      const keyTarget = this.getKey(keyPath);
+      const keyTarget = this.getKey(keyPath)
 
-      if (keyTarget != undefined) {
-        anyMatch = true;
-        break;
+      if (keyTarget !== undefined) {
+        anyMatch = true
+        break
       }
     }
 
-    return anyMatch;
+    return anyMatch
   }
 
-  call() {
-    this.cutObject(this.rule.paths);
-
-    return;
+  call () {
+    this.cutObject(this.rule.paths)
   }
 }
