@@ -6,7 +6,7 @@ Zero-dependency Prometheus exporter for MongoDB.
 
 Just download mongo_exporter.js from Releases and run it with `mongo` shell.
 
-1. `curl https://github.com/db-ai/mongo_shell_exporter/releases/latest/download/mongo_exporter.js`
+1. `curl -L https://github.com/db-ai/mongo_shell_exporter/releases/latest/download/mongo_exporter.js > mongo_exporter.js`
 2. `mongo --quiet mongo_exporter.js`
 
 You can pass other options, like authentication, port, host or connection uri as usual.
