@@ -10,7 +10,7 @@
     "test": "standard",
     "build": "webpack",
     "mongo": "sh -c 'npm run build && mongo --quiet dist/mongo_exporter.js'",
-    "mongo-rs": "sh -c \"npm run build && mongo 'mongodb://mongodb_exporter:password@localhost:27667/?connect=direct' --quiet dist/mongo_exporter.js\""
+    "mongo-rs": "sh -c \"npm run build && mongo 'mongodb://mongodb_exporter:password@localhost:27667/' --quiet dist/mongo_exporter.js\""
   },
   "author": "",
   "license": "MIT",
