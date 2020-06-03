@@ -22,6 +22,9 @@ export default class Collector {
   collect () {
     this.exporter.beginProbe()
 
+    // Allow running queries on secondaries. Slavery is bad.
+    rs.slaveOk()
+
     this.exporter.exportServerStatus(function () {
       return this.getServerStatus()
     }.bind(this))
