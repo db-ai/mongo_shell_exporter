@@ -28,10 +28,9 @@ export default class Exporter {
     const context = { db: database, coll: collection }
     const [collectionStatus, runtime, error] = this.measureCallback(callback)
 
-    // TODO: Check cursor status
-    const stats = collectionStatus[0]
-
     if (this.registry.writeProbe('$collStats', runtime, error, context)) return
+
+    const stats = collectionStatus[0]
 
     const latencyStats = this.cutKey(stats, 'latencyStats')
     const storageStats = this.cutKey(stats, 'storageStats')
