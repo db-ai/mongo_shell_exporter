@@ -1,4 +1,4 @@
-class Exporter {
+export default class Exporter {
   constructor(registy) {
     this.registry = registy;
   }

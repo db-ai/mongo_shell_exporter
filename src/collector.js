@@ -11,7 +11,7 @@ const collectionStatusPipeline = [{
   }
 }];
 
-class Collector {
+export default class Collector {
   constructor(mongo, exporter) {
     this.mongo = mongo;
     this.exporter = exporter;

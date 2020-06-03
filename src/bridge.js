@@ -1,4 +1,4 @@
-class Bridge {
+export default class Bridge {
   constructor(config = DefaultBridgeConfig) {
     this.config = config;
   }

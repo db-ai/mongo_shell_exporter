@@ -1,10 +1,10 @@
-try {
-  load('collector.js');
-  load('metric.js');
-  load('bridge.js');
-  load('registry.js');
-  load('exporter.js');
+import Collector from './collector.js';
+import Bridge from './bridge.js';
+import Exporter from './exporter.js';
+import Registry from './registry.js';
+const exporter_package = require('../package.json');
 
+try {
   const bridge = new Bridge();
   const registry = new Registry(bridge, "mongo_");
   const exporter = new Exporter(registry);
@@ -12,6 +12,9 @@ try {
 
   collector.collect();
   exporter.registry.output();
+
+  print("# TYPE mongo_shell_exporter_info gauge")
+  print(`mongo_shell_exporter_info{version="${exporter_package.version}", shell="${version()}"} 1`);
 
   print("# TYPE mongo_shell_exporter_ok gauge")
   print(`mongo_shell_exporter_ok 1`);

@@ -1,4 +1,4 @@
-class Metric {
+export default class Metric {
   constructor(type, name, help, labels = {}) {
     this._name = name;
     this._help = help;
