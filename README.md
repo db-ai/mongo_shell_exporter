@@ -88,6 +88,5 @@ You can find kind of *http server* example in `examples` folder. It uses `nc` to
 
 There is multiple caveats with this method as well:
 
-1. Metics are collected way before connection is established and can be very stale
-2. No authentication, authorization or access control of any kind
-3. `nc` implementations can differ and it might be tricky to properly configure it
+1. No authentication, authorization or access control of any kind
+2. `nc` implementations can differ and it might be tricky to properly configure it
