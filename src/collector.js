@@ -1,109 +1,108 @@
+import console from 'src/utils/console.js'
+
+import TimeMeter from 'src/time_meter.js'
 import CommandError from 'src/errors/command_error.js'
 
-const serverStatusCommand = { serverStatus: 1 }
-const databaseStatusCommand = { dbStats: 1 }
-const listDatabaseCommand = { listDatabases: 1 }
-
-const collectionStatusPipeline = [{
-  $collStats: {
-    storageStats: {},
-    latencyStats: {
-      histograms: true
-    }
-  }
-}]
+const _registredProbes = {}
+const _autorunProbes = []
 
 export default class Collector {
-  constructor (mongo, exporter) {
-    this.mongo = mongo
-    this.exporter = exporter
+  static get probes () {
+    return _registredProbes
+  }
+
+  static get autorunProbes () {
+    return _autorunProbes
+  }
+
+  static registerProbe (probeClass, config = {}) {
+    console.debug(`Register: ${probeClass.name}. Autorun ${probeClass.autorun}`)
+    const queueItem = this.makeQueueItem(probeClass, config)
+    this.probes[probeClass.name] = queueItem
+
+    if (probeClass.autorun) this.autorunProbes.push(queueItem)
+  }
+
+  static makeQueueItem (probeClass, config) {
+    return { Constructor: probeClass, config: config }
+  }
+
+  constructor (mongo, bridge) {
+    this._mongo = mongo
+    this._bridge = bridge
+
+    this.queue = [].concat(Collector.autorunProbes)
+
+    this._running = false
+
+    this._collectorRuntime = new TimeMeter(false)
+  }
+
+  get mongo () {
+    return this._mongo
+  }
+
+  get bridge () {
+    return this._bridge
+  }
+
+  get running () {
+    return this._running === true
+  }
+
+  get stopped () {
+    return this._running === false
+  }
+
+  start () {
+    this._running = true
+  }
+
+  stop () {
+    if (this.stopped) return
+
+    this._running = false
   }
 
   collect () {
-    this.exporter.beginProbe()
+    if (this.running) return
 
     // Allow running queries on secondaries. Slavery is bad.
     rs.slaveOk()
 
-    this.exporter.exportServerStatus(function () {
-      return this.getServerStatus()
-    }.bind(this))
+    this._collectorRuntime.start()
+    this.start()
 
-    const databasesList = this.exporter.databaseListProbe(function () {
-      return this.listDatabases()
-    }.bind(this))
+    while (this.queue.length > 0) {
+      if (this.stopped) break
 
-    if (databasesList === undefined) return this.abortProbe('databaseList')
+      this.consumeQueue()
+    }
 
-    for (const database of databasesList) {
-      const currentDatabase = this.getDatabase(database.name)
+    this._collectorRuntime.stop()
+  }
 
-      this.exporter.exportDatabaseStatus(database.name, function () {
-        return this.getDatabaseStatus(currentDatabase)
-      }.bind(this))
+  addToQueue (probeClass, config) {
+    console.debug(`Queued: ${probeClass.name}, config: ${JSON.stringify(config)}`)
+    this.queue.push(Collector.makeQueueItem(probeClass, config))
+  }
 
-      const collectionList = this.exporter.collectionListProbe(database.name, function () {
-        return this.getCollectionNames(currentDatabase)
-      }.bind(this))
+  consumeQueue () {
+    if (this.stopped) return
 
-      if (collectionList === undefined) return this.abortProbe('collectionList')
+    const probe = this.queue.shift()
 
-      for (const collectionName of collectionList) {
-        this.exporter.exportCollectionStatus(database.name, collectionName, function () {
-          return this.getCollectionStatus(currentDatabase, collectionName)
-        }.bind(this))
-      };
-    };
+    console.debug(
+      `Queue size: ${this.queue.length} collector: ${this.mongo}, probe ${probe.Constructor.name}. `
+    )
 
-    this.exporter.finishProbe()
-  };
-
-  getServerStatus () {
-    const response = this.mongo.adminCommand(serverStatusCommand)
-
-    this.assertCommandOk(response, serverStatusCommand)
-
-    return response
-  };
-
-  getCollectionNames (currentDatabase) {
-    return currentDatabase.getCollectionNames()
-  };
-
-  listDatabases () {
-    const databasesList = this.mongo.adminCommand(listDatabaseCommand)
-
-    this.assertCommandOk(databasesList, listDatabaseCommand)
-
-    return databasesList.databases
-  };
-
-  getDatabase (databaseName) {
-    return this.mongo.getDB(databaseName)
-  };
-
-  getDatabaseStatus (database) {
-    const dbStat = database.runCommand(databaseStatusCommand)
-
-    this.assertCommandOk(dbStat, databaseStatusCommand)
-
-    return dbStat
-  };
-
-  getCollectionStatus (database, collectionName) {
-    const currentCollection = database.getCollection(collectionName)
-    const collStatCursor = currentCollection.aggregate(collectionStatusPipeline)
-
-    return collStatCursor.toArray()
-  };
+    const currentProbe = new probe.Constructor(this, probe.config)
+    currentProbe.run()
+  }
 
   assertCommandOk (response, command) {
     if (response.ok !== 1) {
       throw new CommandError(response, command)
-    };
+    }
   }
-
-  abortProbe (stageName) {
-    this.exporter.finishProbe()
-  };
 }

@@ -9,8 +9,10 @@
   "scripts": {
     "test": "standard",
     "build": "webpack",
+    "web": "sh -c 'npm run build && sh examples/web.sh'",
     "mongo": "sh -c 'npm run build && mongo --quiet dist/mongo_exporter.js'",
-    "mongo-rs": "sh -c \"npm run build && mongo 'mongodb://mongodb_exporter:password@localhost:27667/' --quiet dist/mongo_exporter.js\""
+    "mongo-rs": "sh -c \"npm run build && mongo 'mongodb://mongodb_exporter:password@localhost:27667/' --quiet dist/mongo_exporter.js\"",
+    "watch:mongo": "onchange 'src/**/*.js' 'src/**/*.json' -- npm run mongo"
   },
   "author": "",
   "license": "MIT",

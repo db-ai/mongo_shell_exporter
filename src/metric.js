@@ -1,82 +1,82 @@
+import Counter from 'src/metric/counter.js'
+import Gauge from 'src/metric/gauge.js'
+import Histogram from 'src/metric/histogram.js'
+
 export default class Metric {
-  constructor (type, name, help, labels = {}) {
+  static newOfType (typeName, name, help) {
+    typeName = typeName.toLowerCase()
+    let metricType
+
+    switch (typeName) {
+      case 'counter':
+        metricType = Counter
+        break
+      case 'gauge':
+        metricType = Gauge
+        break
+      case 'histogram':
+        metricType = Histogram
+        break
+      default:
+        throw new Error(`Unsupported metric type '${typeName}'`)
+    }
+
+    const metric = new Metric(metricType, typeName, name, help)
+
+    return metric
+  }
+
+  constructor (TypeClassName, typeName, name, help) {
+    this.TypeClassName = TypeClassName
     this._name = name
     this._help = help
-    this._type = type
+    this._typeName = typeName
 
-    this._value = undefined
-    this._timestamp = undefined
+    // As for 4.2.7 this is not ES6 Map, but mongo own weird Polyfill ¯\_(ツ)_/¯
+    // https://github.com/mongodb/mongo/blob/6bcda378bfa25ae70ac15508c171e5eeb2269958/src/mongo/shell/types.js#L531
+    this.labeledValues = new Map()
+    this.onwValue = new TypeClassName({})
 
-    this.labels = labels
-  }
-
-  set value (newValue) {
-    this._value = newValue
-  }
-
-  set timestamp (newTimestamp) {
-    this._timestamp = newTimestamp
+    this.labeledValues.put({}, this.onwValue)
   }
 
   get name () {
     return this._name
   }
 
-  get banner () {
-    const buffer = []
-
-    // if(this._help) {
-    //   buffer.push(this.help);
-    // }
-
-    buffer.push(this.type)
-
-    return buffer.join('\n')
-  }
-
-  get metric () {
-    const buffer = [this.identity]
-
-    if (this._value === undefined) {
-      buffer.push('Nan')
-    } else {
-      buffer.push(this._value)
-    }
-
-    if (this._timestamp !== undefined) {
-      buffer.push(this._timestamp)
-    }
-
-    return buffer.join(' ')
-  }
-
   get help () {
-    return (`# HELP ${this._name} ${this._help}`)
+    return this._help
   }
 
   get type () {
-    return (`# TYPE ${this._name} ${this._type}`)
+    return this._typeName
   }
 
-  get identity () {
-    return `${this._name}${this.stringLabels}`
+  get series () {
+    return this.labeledValues.values()
   }
 
-  get stringLabels () {
-    const buffer = []
+  setValue (seriesLabels, newValue) {
+    const serie = this.findOrCreateSerie(seriesLabels)
+    serie.value = newValue
+  }
 
-    for (const key in this.labels) {
-      const element = this.labels[key]
-      // element = element.replace(/"/g, '\\\"');
-      buffer.push(`${key}="${element}"`)
+  setLabelValue (seriesLabels, seriesValue, labelKey, labelValue) {
+    const serie = this.findOrCreateSerie(seriesLabels)
+    serie.setLabel(labelKey, labelValue)
+
+    if (seriesValue !== undefined) {
+      serie.value = seriesValue
     }
+  }
 
-    if (buffer.length === 0) {
-      return ''
-    } else {
-      const allLabels = buffer.join(', ')
+  findOrCreateSerie (labels) {
+    let serie = this.labeledValues.get(labels)
+    if (serie !== null) return serie
 
-      return `{${allLabels}}`
-    }
+    serie = new this.TypeClassName(labels)
+    this.labeledValues.put(labels, serie)
+
+    return serie
   }
 }

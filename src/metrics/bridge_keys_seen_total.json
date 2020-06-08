@@ -1,0 +1,7 @@
+{
+  "name": "bridge_keys_seen_total",
+  "type": "counter",
+
+  "help": "",
+  "link": ""
+}

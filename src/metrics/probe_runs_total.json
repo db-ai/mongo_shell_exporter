@@ -1,0 +1,7 @@
+{
+  "name": "probe_runs_total",
+  "type": "counter",
+
+  "help": "",
+  "link": ""
+}

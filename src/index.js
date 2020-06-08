@@ -1,17 +1,25 @@
+import console from 'src/utils/console.js'
+
 import Collector from 'src/collector.js'
 import Bridge from 'src/bridge.js'
 import Exporter from 'src/exporter.js'
 import Registry from 'src/registry.js'
 const exporterPackage = require('../package.json')
 
+require('src/metrics/all.js')
+require('src/probes/server_status.js')
+
 try {
-  const bridge = new Bridge()
-  const registry = new Registry(bridge, 'mongo_')
+  const registry = new Registry()
+  const bridge = new Bridge(registry)
   const exporter = new Exporter(registry)
-  const collector = new Collector(db.getMongo(), exporter)
+  const collector = new Collector(db.getMongo(), bridge)
 
   collector.collect()
-  exporter.registry.output()
+  console.debug('Collector OK')
+
+  exporter.export()
+  console.debug('Exporter OK')
 
   print('# TYPE mongo_shell_exporter_info gauge')
   print(`mongo_shell_exporter_info{version="${exporterPackage.version}", shell="${version()}"} 1`)

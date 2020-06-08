@@ -1,41 +1,99 @@
-import { DefaultBridgeConfig } from 'src/bridge/default_bridge_config'
+import console from 'src/utils/console.js'
+import TimeMeter from 'src/time_meter.js'
 
 export default class Bridge {
-  constructor (config = DefaultBridgeConfig) {
-    this.config = config
+  constructor (registry) {
+    this._registry = registry.config
+    this.parseTree = this._registry.parseTree
   }
 
-  parse (object, registry, context) {
-    for (const rule of this.config) {
-      if (Object.keys(object).length === 0) {
+  get registry () {
+    return this._registry
+  }
+
+  getMetric (metricName, labels) {
+    return this.registry.getMertic(metricName, labels)
+  }
+
+  consume (source, object, labels = {}) {
+    const bridgeRuntime = new TimeMeter()
+
+    const tree = this.parseTree[source]
+
+    if (tree === undefined) {
+      console.debug(`No parse tree for source: ${source}`)
+      return
+    }
+
+    const metricKeysSeen = this.getMetric('bridge_keys_seen_total', { source: source })
+    this.processLevel(tree, object, labels, metricKeysSeen)
+
+    bridgeRuntime.stop()
+
+    this.getMetric('bridge_runtime_seconds', { source: source }).inc(
+      bridgeRuntime.runtimeSeconds
+    )
+    this.getMetric('bridge_runs_total', { source: source }).inc()
+  }
+
+  processLevel (currentTree, currentObject, labels, metricKeysSeen) {
+    // if (currentTree === undefined) return
+
+    for (const key in currentObject) {
+      metricKeysSeen.inc()
+
+      if (Object.prototype.hasOwnProperty.call(currentObject, key)) {
+        if (Object.prototype.hasOwnProperty.call(currentTree, key)) {
+          const currentValue = currentObject[key]
+          const currentTreeValue = currentTree[key]
+
+          if (currentValue.constructor.name === 'Object') {
+            this.processLevel(currentTreeValue, currentValue, labels, metricKeysSeen)
+            delete currentObject[key]
+            continue
+          }
+
+          if (typeof currentTreeValue === 'function') {
+            const [, value] = this.normalizedValue(currentValue)
+            //  function (sourceValue, sourceLabels = {})
+            currentTreeValue(value, labels)
+            continue
+          }
+        }
+      }
+    }
+  }
+
+  normalizedValue (value) {
+    const currentType = typeof value
+    let returnValue
+    let unsupported
+
+    switch (currentType) {
+      case 'string':
+        unsupported = true
+        returnValue = value
         break
-      }
+      case 'number':
+        returnValue = value
+        break
+      case 'boolean':
+        returnValue = Number(value)
+        break
+      case 'object':
+        switch (value.constructor) {
+          case NumberLong:
+            returnValue = Number(value)
+            break
+        }
 
-      const ActionClass = rule.action
-      const action = new ActionClass(object, rule, registry, context)
-      action.matchAndCall()
+        unsupported = true
+        break
+      default:
+        unsupported = true
+        break
     }
 
-    this.recordRemaining(object, registry, context)
-  }
-
-  recordRemaining (object, registry, context, path = []) {
-    for (const key in object) {
-      const currentPath = path.concat(key)
-      const value = object[key]
-
-      if (value.constructor === Object) {
-        this.recordRemaining(value, registry, context, currentPath)
-      } else {
-        this.recordUnknownMetric(currentPath, value.constructor.name, registry, context)
-      }
-    }
-  }
-
-  recordUnknownMetric (path, type, registry, context) {
-    const fullPath = path.join('.')
-    const labels = Object.merge(context, { path: fullPath, type: type })
-
-    registry.add('gauge', 'unknown_metric', 'Metrics from Mongo that are not known to exporter', labels, 1)
+    return [unsupported, returnValue]
   }
 }

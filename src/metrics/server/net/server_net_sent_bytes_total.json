@@ -1,0 +1,38 @@
+{
+  "name": "server_net_sent_bytes_total",
+  "type": "counter",
+  "source": "serverStatus",
+  "root": ["network"],
+
+  "help": "",
+  "link": "",
+
+  "map": [
+    { "labels": { "type": "logical" }, "value_path": ["bytesOut"] },
+    { "labels": { "type": "physical" }, "value_path": ["physicalBytesOut"] },
+    {
+      "labels": { "lib": "snappy", "role": "compressor" },
+      "value_path": ["compression", "snappy", "compressor", "bytesOut"]
+    },
+    {
+      "labels": { "lib": "snappy", "role": "decompressor" },
+      "value_path": ["compression", "snappy", "decompressor", "bytesOut"]
+    },
+    {
+      "labels": { "lib": "zlib", "role": "compressor" },
+      "value_path": ["compression", "zlib", "compressor", "bytesOut"]
+    },
+    {
+      "labels": { "lib": "zlib", "role": "decompressor" },
+      "value_path": ["compression", "zlib", "decompressor", "bytesOut"]
+    },
+    {
+      "labels": { "lib": "zstd", "role": "compressor" },
+      "value_path": ["compression", "zstd", "compressor", "bytesOut"]
+    },
+    {
+      "labels": { "lib": "zstd", "role": "decompressor" },
+      "value_path": ["compression", "zstd", "decompressor", "bytesOut"]
+    }
+  ]
+}

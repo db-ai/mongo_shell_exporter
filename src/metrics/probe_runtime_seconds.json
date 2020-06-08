@@ -1,0 +1,7 @@
+{
+  "name": "probe_runtime_seconds",
+  "type": "counter",
+
+  "help": "",
+  "link": ""
+}

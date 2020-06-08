@@ -1,0 +1,7 @@
+{
+  "name": "bridge_runtime_seconds",
+  "type": "counter",
+
+  "help": "",
+  "link": ""
+}

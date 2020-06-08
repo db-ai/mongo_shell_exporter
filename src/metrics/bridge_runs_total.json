@@ -1,0 +1,7 @@
+{
+  "name": "bridge_runs_total",
+  "type": "counter",
+
+  "help": "",
+  "link": ""
+}

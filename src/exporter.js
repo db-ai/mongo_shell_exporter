@@ -1,116 +1,44 @@
+import TimeMeter from 'src/time_meter'
+import Metric from 'src/metric.js'
+
 export default class Exporter {
-  constructor (registy) {
-    this.registry = registy
+  constructor (registry) {
+    this._registry = registry.config
+    this._runtimeMetric = Metric.newOfType(
+      'counter',
+      'export_flush_runtime_seconds',
+      'Time spent printing metrics to stdout'
+    )
   }
 
-  exportServerStatus (callback) {
-    const [serverStatus, runtime, error] = this.measureCallback(callback)
+  export () {
+    const exportRuntime = new TimeMeter()
+    const allMetrics = this._registry.metrics
 
-    if (this.registry.writeProbe('serverStatus', runtime, error)) return
+    for (const metricName in allMetrics) {
+      if (Object.prototype.hasOwnProperty.call(allMetrics, metricName)) {
+        const metric = allMetrics[metricName]
 
-    this.registry.parse(serverStatus)
-
-    return serverStatus
-  };
-
-  exportDatabaseStatus (database, callback) {
-    const context = { db: database }
-    const [databaseStatus, runtime, error] = this.measureCallback(callback)
-
-    if (this.registry.writeProbe('dbStats', runtime, error, context)) return
-
-    this.registry.parse(databaseStatus, context)
-
-    return databaseStatus
-  };
-
-  exportCollectionStatus (database, collection, callback) {
-    const context = { db: database, coll: collection }
-    const [collectionStatus, runtime, error] = this.measureCallback(callback)
-
-    if (this.registry.writeProbe('$collStats', runtime, error, context)) return
-
-    const stats = collectionStatus[0]
-
-    const latencyStats = this.cutKey(stats, 'latencyStats')
-    const storageStats = this.cutKey(stats, 'storageStats')
-    const indexDetails = this.cutKey(storageStats, 'indexDetails')
-    this.cutKey(storageStats, 'indexSizes')
-
-    this.registry.parse(stats, context)
-    this.registry.parse(latencyStats, context)
-    this.registry.parse(storageStats, context)
-
-    for (const key in indexDetails) {
-      const indexStat = indexDetails[key]
-      const currentIndex = { wiredTiger: indexStat }
-      const currentContext = Object.merge(context, { idx: key })
-
-      this.registry.parse(currentIndex, currentContext)
+        this.outputMetric(metric)
+      }
     }
 
-    return collectionStatus
-  };
+    exportRuntime.stop()
 
-  databaseListProbe (callback) {
-    const [databaseList, runtime, error] = this.measureCallback(callback)
-
-    this.registry.writeProbe('listDatabases', runtime, error)
-
-    return databaseList
+    this._runtimeMetric.findOrCreateSerie({}).inc(exportRuntime.runtimeSeconds)
+    this.outputMetric(this._runtimeMetric)
   }
 
-  collectionListProbe (database, callback) {
-    const [collectionList, runtime, error] = this.measureCallback(callback)
-
-    this.registry.writeProbe('listCollections', runtime, error, { db: database })
-
-    return collectionList
-  }
-
-  measureCallback (callback) {
-    const beforeClock = this.getCurrentTime()
-    let result
-    let error = null
-
-    try {
-      result = callback.call()
-    } catch (err) {
-      error = err
+  outputMetric (metric) {
+    if (metric.help) {
+      print(`# HELP ${metric.name} ${metric.help}`)
     }
 
-    const afterClock = this.getCurrentTime()
-    const runtime = this.getRuntime(beforeClock, afterClock)
+    print(`# TYPE ${metric.name} ${metric.type}`)
 
-    return [result, runtime, error]
-  }
-
-  beginProbe () {
-    this._startTime = this.getCurrentTime()
-  }
-
-  finishProbe () {
-    this._endTime = this.getCurrentTime()
-    const runtime = this.getRuntime(this._startTime, this._endTime)
-
-    this.registry.write('probe_duration_seconds', runtime)
-  }
-
-  // TODO: Figure out how to get monotonic clock source. There is no perfomance object in
-  // the Mongo js engine wrapper :|
-  getCurrentTime () {
-    return new Date().getTime()
-  }
-
-  getRuntime (start, end) {
-    return (end - start) / 1000.0
-  }
-
-  cutKey (object, key, deleteKey = true) {
-    const value = object[key]
-
-    if (deleteKey) delete object[key]
-
-    return value
+    for (const serie of metric.series) {
+      if (serie.value === undefined) continue
+      print(`${metric.name}${serie.stringLabels} ${serie.value}`)
+    }
   }
 }

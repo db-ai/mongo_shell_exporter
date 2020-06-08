@@ -1,61 +1,112 @@
 import Metric from 'src/metric.js'
 
+const _registredMetrics = {}
+const _parseTree = {}
+
 export default class Registry {
-  constructor (bridge, prefix = '') {
-    this.bridge = bridge
-    this.all = {}
-    this.prefix = prefix
+  static get metrics () {
+    return _registredMetrics
   }
 
-  writeProbe (probeName, runtime, isError, labels = {}) {
-    const context = Object.merge({ probe: probeName }, labels)
+  static get parseTree () {
+    return _parseTree
+  }
 
-    this.write('probe_duration_seconds', runtime, context)
+  static getMertic (name, labels = {}) {
+    const metric = Registry.metrics[name]
 
-    if (isError != null) {
-      this.write('probe_ok', 0, context)
-      return true
+    if (metric) {
+      const serie = metric.findOrCreateSerie(labels)
+      if (serie) return serie
+
+      Registry.missingMetric(name, labels)
+    } else {
+      Registry.missingMetricLabel(name, labels)
     }
   }
 
-  parse (object, context = {}) {
-    this.bridge.parse(object, this, context)
+  static missingMetricLabel (name, labels) {
+    throw new Error(`Can't get metric ${name}(${JSON.stringify(labels)}): metric doesn't exist`)
   }
 
-  write (key, value, context = {}) {
-    const object = {}
-    object[key] = value
-
-    this.parse(object, context)
+  static missingMetric (name, labels) {
+    throw new Error(`Can't get metric ${name}(${JSON.stringify(labels)}): labeled serie doesn't exist`)
   }
 
-  add (type, metricName, help, labels = {}, value, timestamp) {
-    const metric = this.fetch(type, metricName, help, labels)
+  static createMetric (config) {
+    Registry.validateConfig(config)
 
-    metric.value = value
-    metric.timestamp = timestamp
+    const rootPath = [config.source]
+    if (config.root) rootPath.push(...config.root)
 
-    this.all[metric.identity] = metric
+    const metric = Metric.newOfType(config.type, config.name, config.help)
+    Registry.metrics[config.name] = metric
+
+    if (config.map === undefined) return metric
+
+    let ruleIndex = 0
+
+    for (const rule of config.map) {
+      ruleIndex = ruleIndex + 1
+
+      if (rule.value_path) {
+        const path = rootPath.concat(rule.value_path)
+
+        Registry.createSourceTreePath(path, function (sourceValue, sourceLabels = {}) {
+          const metricLabels = Object.merge(sourceLabels, rule.labels)
+          metric.setValue(metricLabels, sourceValue)
+        })
+      } else if (rule.labels_paths) {
+        const metricValue = rule.value
+
+        for (const labelRule of rule.labels_paths) {
+          const path = rootPath.concat(labelRule.value_path)
+
+          Registry.createSourceTreePath(path, function (sourceValue, sourceLabels = {}) {
+            metric.setLabelValue(sourceLabels, metricValue, labelRule.label, sourceValue)
+          })
+        }
+      } else {
+        throw new Error(
+          `Rule #${ruleIndex} in '${config.name}' doesn't have nor value_path or labels_paths.`
+        )
+      }
+    }
+
+    return metric
   }
 
-  fetch (type, metricName, help, labels) {
-    metricName = [this.prefix, metricName].join('')
-    return new Metric(type, metricName, help, labels)
+  static validateConfig (config) {
+    const currentMetric = Registry.metrics[config.name]
+
+    if (currentMetric !== undefined) {
+      throw new Error(`Metric ${config.name} is already defined`)
+    }
   }
 
-  output () {
-    const seenKeys = {}
+  static createSourceTreePath (path, callback) {
+    let treeLevel = Registry.parseTree
+    const targetKey = path.pop()
 
-    for (const key in this.all) {
-      const element = this.all[key]
-      const metricName = element.name
+    if (targetKey === undefined) {
+      throw new Error('Attempted to bind to empty path')
+    }
 
-      if (seenKeys[metricName] === undefined) {
-        seenKeys[metricName] = true
-        print(element.banner)
+    for (const pathLevel of path) {
+      const currentLevel = treeLevel[pathLevel]
+
+      if (currentLevel === undefined) {
+        treeLevel[pathLevel] = {}
       }
 
-      print(element.metric)
+      treeLevel = treeLevel[pathLevel]
     }
+
+    treeLevel[targetKey] = callback
+    return true
+  }
+
+  constructor () {
+    this.config = Registry
   }
 }

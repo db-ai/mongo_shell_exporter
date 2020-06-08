@@ -1,0 +1,20 @@
+{
+  "name": "server_info",
+  "type": "gauge",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "map": [
+    {
+      "value": 1,
+      "labels_paths": [
+        { "label": "host", "value_path": ["host"] },
+        { "label": "version", "value_path": ["version"] },
+        { "label": "process", "value_path": ["process"] },
+        { "label": "pid", "value_path": ["pid"] }
+      ]
+    }
+  ]
+}
