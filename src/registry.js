@@ -78,11 +78,10 @@ export default class Registry {
     const values = Object.values(this.metrics)
 
     for (const metric of values) {
-      if (metric.config.sources !== undefined) {
-        for (const metricSource of metric.config.sources) {
-          metric.config.source = metricSource
-          this.parseMerticConfig(metric)
-        }
+      if (metric.config.map_groups !== undefined) {
+        this.parseMapGroups(metric.config.map_groups, metric)
+      } else if (metric.config.sources !== undefined) {
+        this.parseMultipleSources(metric.config.sources, metric)
       } else if (metric.config.source !== undefined) {
         this.parseMerticConfig(metric)
       }
@@ -91,6 +90,25 @@ export default class Registry {
     compilationRuntime.stop()
 
     this.getMetric('registry_compile_time_seconds').value = compilationRuntime.runtimeSeconds
+  }
+
+  parseMapGroups (groups, metric) {
+    for (const mapGroup of groups) {
+      metric.config.map = mapGroup.map
+
+      this.parseMultipleSources(mapGroup.sources, metric)
+    }
+
+    delete metric.config.source
+  }
+
+  parseMultipleSources (sources, metric) {
+    for (const metricSource of sources) {
+      metric.config.source = metricSource
+      this.parseMerticConfig(metric)
+    }
+
+    delete metric.config.source
   }
 
   parseMerticConfig (metric) {
