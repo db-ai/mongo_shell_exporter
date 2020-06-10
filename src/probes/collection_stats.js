@@ -44,14 +44,6 @@ export default class CollectionStatsProbe extends Probe {
       }
     }
   }
-
-  cutKey (object, key, deleteKey = true) {
-    const value = object[key]
-
-    if (deleteKey) delete object[key]
-
-    return value
-  }
 }
 
 Probe.register(CollectionStatsProbe)

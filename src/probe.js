@@ -88,4 +88,13 @@ export default class Probe {
   abortQueue () {
     this.collector.abort()
   }
+
+  // Service functions
+  cutKey (object, key, deleteKey = true) {
+    const value = object[key]
+
+    if (deleteKey) delete object[key]
+
+    return value
+  }
 }
