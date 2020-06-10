@@ -11,10 +11,6 @@ export default class Bridge {
     return this._registry
   }
 
-  getMetric (metricName, labels) {
-    return this.registry.getMertic(metricName, labels)
-  }
-
   consume (source, object, labels = {}) {
     const bridgeRuntime = new TimeMeter()
 
@@ -26,22 +22,26 @@ export default class Bridge {
       return
     }
 
-    const metricKeysSeen = this.getMetric('bridge_keys_seen_total', { source: source })
-    this.processLevel(tree, object, labels, metricKeysSeen)
+    const levelMetrics = {
+      keysSeen: this.registry.getMetric('bridge_keys_seen_total', { source: source }),
+      keysExported: this.registry.getMetric('bridge_keys_exported_total', { source: source })
+    }
+
+    this.processLevel(tree, object, labels, levelMetrics)
 
     bridgeRuntime.stop()
 
-    this.getMetric('bridge_runtime_seconds', { source: source }).inc(
+    this.registry.getMetric('bridge_runtime_seconds', { source: source }).inc(
       bridgeRuntime.runtimeSeconds
     )
-    this.getMetric('bridge_runs_total', { source: source }).inc()
+    this.registry.getMetric('bridge_runs_total', { source: source }).inc()
   }
 
-  processLevel (currentTree, currentObject, labels, metricKeysSeen) {
+  processLevel (currentTree, currentObject, labels, levelMetrics) {
     // if (currentTree === undefined) return
 
     for (const key in currentObject) {
-      metricKeysSeen.inc()
+      levelMetrics.keysSeen.inc()
 
       if (Object.prototype.hasOwnProperty.call(currentObject, key)) {
         if (Object.prototype.hasOwnProperty.call(currentTree, key)) {
@@ -49,7 +49,7 @@ export default class Bridge {
           const currentTreeValue = currentTree[key]
 
           if (currentValue.constructor.name === 'Object') {
-            this.processLevel(currentTreeValue, currentValue, labels, metricKeysSeen)
+            this.processLevel(currentTreeValue, currentValue, labels, levelMetrics)
             delete currentObject[key]
             continue
           }
@@ -58,6 +58,7 @@ export default class Bridge {
             const [, value] = this.normalizedValue(currentValue)
             //  function (sourceValue, sourceLabels = {})
             currentTreeValue(value, labels)
+            levelMetrics.keysExported.inc()
             continue
           }
         }
