@@ -1,0 +1,11 @@
+{
+  "sources": ["dbStats"],
+  "name": "db_average_document_size",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": ["avgObjSize"]
+    }
+  ]
+}

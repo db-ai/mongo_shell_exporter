@@ -1,0 +1,11 @@
+{
+  "sources": ["dbStats"],
+  "name": "db_scale_factor",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": ["scaleFactor"]
+    }
+  ]
+}
