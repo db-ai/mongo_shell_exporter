@@ -37,7 +37,7 @@ export default class CollectionStatsProbe extends Probe {
 
     for (const indexName in indexDetails) {
       if (Object.prototype.hasOwnProperty.call(indexDetails, indexName)) {
-        const indexStat = indexDetails[indexName]
+        const indexStat = { wiredTiger: indexDetails[indexName] }
         const indexLabels = Object.merge(labels, { idx: indexName })
 
         this.bridge.consume('collectionStats.indexDetails', indexStat, indexLabels)
