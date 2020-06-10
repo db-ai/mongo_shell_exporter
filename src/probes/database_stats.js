@@ -9,8 +9,9 @@ export default class DatabaseStatsProbe extends Probe {
   }
 
   execute () {
-    this.runCommand(this.config.databaseName, _databaseStatsProbe)
-    // dbStats
+    const dbStats = this.runCommand(this.config.databaseName, _databaseStatsProbe)
+    this.bridge.consume('dbStats', dbStats, { db: this.config.databaseName })
+
     this.queueProbe(ListCollectionsProbe, ListCollectionsProbe.config(this.config.databaseName))
   }
 }
