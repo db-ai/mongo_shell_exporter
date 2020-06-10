@@ -10,6 +10,10 @@ export default class DatabaseStatsProbe extends Probe {
 
   execute () {
     const dbStats = this.runCommand(this.config.databaseName, _databaseStatsProbe)
+
+    delete dbStats.ok
+    delete dbStats.db
+
     this.bridge.consume('dbStats', dbStats, { db: this.config.databaseName })
 
     this.queueProbe(ListCollectionsProbe, ListCollectionsProbe.config(this.config.databaseName))
