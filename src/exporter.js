@@ -3,12 +3,12 @@ import Metric from 'src/metric.js'
 
 export default class Exporter {
   constructor (registry) {
-    this._registry = registry.config
-    this._runtimeMetric = Metric.newOfType(
-      'counter',
-      'export_flush_runtime_seconds',
-      'Time spent printing metrics to stdout'
-    )
+    this._registry = registry
+    this._runtimeMetric = Metric.newOfType({
+      type: 'counter',
+      name: 'export_flush_runtime_seconds',
+      help: 'Time spent printing metrics to stdout'
+    })
   }
 
   export () {

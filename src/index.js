@@ -15,6 +15,9 @@ try {
   const exporter = new Exporter(registry)
   const collector = new Collector(db.getMongo(), bridge)
 
+  registry.compileTree()
+  console.debug('Registry tree OK')
+
   collector.collect()
   console.debug('Collector OK')
 

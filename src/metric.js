@@ -3,8 +3,8 @@ import Gauge from 'src/metric/gauge.js'
 import Histogram from 'src/metric/histogram.js'
 
 export default class Metric {
-  static newOfType (typeName, name, help) {
-    typeName = typeName.toLowerCase()
+  static newOfType (config) {
+    const typeName = config.type.toLowerCase()
     let metricType
 
     switch (typeName) {
@@ -21,16 +21,17 @@ export default class Metric {
         throw new Error(`Unsupported metric type '${typeName}'`)
     }
 
-    const metric = new Metric(metricType, typeName, name, help)
+    const metric = new Metric(metricType, typeName, config.name, config.help, config)
 
     return metric
   }
 
-  constructor (TypeClassName, typeName, name, help) {
+  constructor (TypeClassName, typeName, name, help, config) {
     this.TypeClassName = TypeClassName
     this._name = name
     this._help = help
     this._typeName = typeName
+    this._config = config
 
     // As for 4.2.7 this is not ES6 Map, but mongo own weird Polyfill ¯\_(ツ)_/¯
     // https://github.com/mongodb/mongo/blob/6bcda378bfa25ae70ac15508c171e5eeb2269958/src/mongo/shell/types.js#L531
@@ -38,6 +39,10 @@ export default class Metric {
     this.onwValue = new TypeClassName({})
 
     this.labeledValues.put({}, this.onwValue)
+  }
+
+  get config () {
+    return this._config
   }
 
   get name () {

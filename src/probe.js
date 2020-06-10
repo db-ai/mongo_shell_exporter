@@ -17,10 +17,10 @@ export default class Probe {
     const _name = this.constructor.name
 
     this._probeMetrics = {
-      runtime: this._bridge.getMetric('probe_runtime_seconds', {
+      runtime: this._bridge.registry.getMetric('probe_runtime_seconds', {
         probe: _name
       }),
-      runs_count: this._bridge.getMetric('probe_runs_total', {
+      runs_count: this._bridge.registry.getMetric('probe_runs_total', {
         probe: _name
       })
     }

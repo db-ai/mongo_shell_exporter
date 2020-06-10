@@ -3,7 +3,7 @@ import TimeMeter from 'src/time_meter.js'
 
 export default class Bridge {
   constructor (registry) {
-    this._registry = registry.config
+    this._registry = registry
     this.parseTree = this._registry.parseTree
   }
 
