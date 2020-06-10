@@ -1,0 +1,11 @@
+{
+  "source": ["collectionStats.storageStats"],
+  "name": "collection_scale_factor",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": ["scaleFactor"]
+    }
+  ]
+}
