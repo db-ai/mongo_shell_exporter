@@ -1,0 +1,79 @@
+{
+  "name": "wt_cursor_calls",
+  "type": "counter",
+
+  "map_groups": [
+    {
+      "sources": [
+        "collectionStats.storageStats",
+        "collectionStats.indexDetails"
+      ],
+      "map": [
+        { "labels": { "action": "create" }, "value_path": ["create calls"] },
+        { "labels": { "action": "insert" }, "value_path": ["insert calls"] },
+        { "labels": { "action": "modify" }, "value_path": ["modify"] },
+        { "labels": { "action": "next" }, "value_path": ["next calls"] },
+        { "labels": { "action": "prev" }, "value_path": ["prev calls"] },
+        { "labels": { "action": "remove" }, "value_path": ["remove calls"] },
+        { "labels": { "action": "reserve" }, "value_path": ["reserve calls"] },
+        { "labels": { "action": "reset" }, "value_path": ["reset calls"] },
+        { "labels": { "action": "search" }, "value_path": ["search calls"] },
+        {
+          "labels": { "action": "search" },
+          "value_path": ["search near calls"]
+        },
+        {
+          "labels": { "action": "truncate" },
+          "value_path": ["truncate calls"]
+        },
+        { "labels": { "action": "update" }, "value_path": ["update calls"] }
+      ]
+    },
+    {
+      "sources": ["serverStatus"],
+      "map": [
+        {
+          "labels": { "action": "create" },
+          "value_path": ["cursor create calls"]
+        },
+        {
+          "labels": { "action": "insert" },
+          "value_path": ["cursor insert calls"]
+        },
+        { "labels": { "action": "modify" }, "value_path": ["cursor modify"] },
+        { "labels": { "action": "next" }, "value_path": ["cursor next calls"] },
+        { "labels": { "action": "prev" }, "value_path": ["cursor prev calls"] },
+        {
+          "labels": { "action": "remove" },
+          "value_path": ["cursor remove calls"]
+        },
+        {
+          "labels": { "action": "reserve" },
+          "value_path": ["cursor reserve calls"]
+        },
+        {
+          "labels": { "action": "reset" },
+          "value_path": ["cursor reset calls"]
+        },
+        {
+          "labels": { "action": "search" },
+          "value_path": ["cursor search calls"]
+        },
+        {
+          "labels": { "action": "search" },
+          "value_path": ["cursor search near calls"]
+        },
+        {
+          "labels": { "action": "truncate" },
+          "value_path": ["cursor truncate calls"]
+        },
+        {
+          "labels": { "action": "update" },
+          "value_path": ["cursor update calls"]
+        }
+      ]
+    }
+  ],
+
+  "root": ["wiredTiger", "cursor"]
+}
