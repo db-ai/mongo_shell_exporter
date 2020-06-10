@@ -8,4 +8,10 @@ export default class Gauge extends AbstractValue {
   set value (newValue) {
     this._value = newValue
   }
+
+  inc (incrementBy = 1, initialValue = 0) {
+    this._value = (this._value || initialValue) + incrementBy
+
+    return this._value
+  }
 }
