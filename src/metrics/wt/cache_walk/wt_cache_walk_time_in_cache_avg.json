@@ -1,0 +1,27 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_walk_time_in_cache_avg",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "Average time in cache for pages that have been visited by the eviction server"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "Average time in cache for pages that have not been visited by the eviction server"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache_walk"
+  ]
+}

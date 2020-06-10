@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_walk_refs_skipped",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "Refs skipped during cache traversal"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache_walk"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_block_manager_file_extenstions_count",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "allocations requiring file extension"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "block-manager"
+  ]
+}

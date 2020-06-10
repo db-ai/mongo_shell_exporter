@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_lsm_queires_couldve_use_filters_but_havent",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "queries that could have benefited from a Bloom filter that did not exist"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "LSM"
+  ]
+}

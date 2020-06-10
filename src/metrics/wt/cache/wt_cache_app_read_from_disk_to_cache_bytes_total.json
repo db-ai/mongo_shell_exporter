@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_app_read_from_disk_to_cache_bytes_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "application threads page read from disk to cache count"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

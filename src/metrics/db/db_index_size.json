@@ -1,0 +1,15 @@
+{
+  "sources": [
+    "dbStats"
+  ],
+  "name": "db_index_size",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "indexSize"
+      ]
+    }
+  ]
+}

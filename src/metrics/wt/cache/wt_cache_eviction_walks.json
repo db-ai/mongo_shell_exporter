@@ -1,0 +1,71 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_eviction_walks",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {
+        "event": "abandoned"
+      },
+      "value_path": [
+        "eviction walks abandoned"
+      ]
+    },
+    {
+      "labels": {
+        "event": " gave up because they restarted their walk twice"
+      },
+      "value_path": [
+        "eviction walks gave up because they restarted their walk twice"
+      ]
+    },
+    {
+      "labels": {
+        "event": "gave up because they saw too many pages and found no candidate"
+      },
+      "value_path": [
+        "eviction walks gave up because they saw too many pages and found no candidates"
+      ]
+    },
+    {
+      "labels": {
+        "event": "gave up because they saw too many pages and found too few candidates"
+      },
+      "value_path": [
+        "eviction walks gave up because they saw too many pages and found too few candidates"
+      ]
+    },
+    {
+      "labels": {
+        "event": "reached end of tree"
+      },
+      "value_path": [
+        "eviction walks reached end of tree"
+      ]
+    },
+    {
+      "labels": {
+        "event": "started from root of tree"
+      },
+      "value_path": [
+        "eviction walks started from root of tree"
+      ]
+    },
+    {
+      "labels": {
+        "event": "started from saved location in tree"
+      },
+      "value_path": [
+        "eviction walks started from saved location in tree"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

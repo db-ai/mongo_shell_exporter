@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cursor_inserted_key_value_bytes",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "cursor-insert key and value bytes inserted"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cursor"
+  ]
+}

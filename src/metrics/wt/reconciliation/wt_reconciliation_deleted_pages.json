@@ -1,0 +1,29 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_reconciliation_deleted_pages",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {
+        "type": "fast-path"
+      },
+      "value_path": [
+        "fast-path pages deleted"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "pages deleted"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "reconciliation"
+  ]
+}

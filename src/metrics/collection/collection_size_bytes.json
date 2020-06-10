@@ -1,0 +1,15 @@
+{
+  "source": [
+    "collectionStats.storageStats"
+  ],
+  "name": "collection_size_bytes",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "size"
+      ]
+    }
+  ]
+}

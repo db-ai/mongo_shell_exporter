@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_btree_checkpoint_generation",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "btree checkpoint generation"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "btree"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_reconciliation_calls_for_eviction",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "page reconciliation calls for eviction"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "reconciliation"
+  ]
+}

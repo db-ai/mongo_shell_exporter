@@ -1,0 +1,27 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_files_current",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "files with active eviction walks"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "files with new eviction walks started"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

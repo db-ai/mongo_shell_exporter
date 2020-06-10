@@ -1,0 +1,69 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_walk_pages_total",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {
+        "type": "could not be queued for eviction"
+      },
+      "value_path": [
+        "Pages that could not be queued for eviction"
+      ]
+    },
+    {
+      "labels": {
+        "type": "queued for eviction"
+      },
+      "value_path": [
+        "Pages currently queued for eviction"
+      ]
+    },
+    {
+      "labels": {
+        "type": "clean"
+      },
+      "value_path": [
+        "Clean pages currently in cache"
+      ]
+    },
+    {
+      "labels": {
+        "type": "dirty"
+      },
+      "value_path": [
+        "Dirty pages currently in cache"
+      ]
+    },
+    {
+      "labels": {
+        "type": "leaf"
+      },
+      "value_path": [
+        "Leaf pages currently in cache"
+      ]
+    },
+    {
+      "labels": {
+        "type": "internal"
+      },
+      "value_path": [
+        "Internal pages currently in cache"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "Total number of pages currently in cache"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache_walk"
+  ]
+}

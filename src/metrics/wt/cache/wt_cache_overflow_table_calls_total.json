@@ -1,0 +1,27 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_overflow_table_calls_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "cache overflow table insert calls"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "cache overflow table remove calls"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

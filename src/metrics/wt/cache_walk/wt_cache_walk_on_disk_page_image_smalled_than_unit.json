@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_walk_on_disk_page_image_smalled_than_unit",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "On-disk page image sizes smaller than a single allocation unit"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache_walk"
+  ]
+}

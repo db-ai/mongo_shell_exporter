@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_walk_created_and_never_writtend_pages_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "Pages created in memory and never written"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache_walk"
+  ]
+}

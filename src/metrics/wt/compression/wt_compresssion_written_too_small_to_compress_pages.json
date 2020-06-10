@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_compresssion_written_too_small_to_compress_pages",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "page written was too small to compress"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "compression"
+  ]
+}

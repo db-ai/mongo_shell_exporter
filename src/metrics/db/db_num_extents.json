@@ -1,0 +1,15 @@
+{
+  "sources": [
+    "dbStats"
+  ],
+  "name": "db_num_extents",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "numExtents"
+      ]
+    }
+  ]
+}

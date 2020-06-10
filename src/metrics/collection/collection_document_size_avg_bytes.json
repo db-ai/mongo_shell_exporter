@@ -1,0 +1,15 @@
+{
+  "source": [
+    "collectionStats.storageStats"
+  ],
+  "name": "collection_document_size_avg_bytes",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "avgObjSize"
+      ]
+    }
+  ]
+}

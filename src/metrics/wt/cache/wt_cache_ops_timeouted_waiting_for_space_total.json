@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_ops_timeouted_waiting_for_space_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "operations timed out waiting for space in cache"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

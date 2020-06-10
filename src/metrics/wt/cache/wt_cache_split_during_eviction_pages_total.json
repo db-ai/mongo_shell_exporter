@@ -1,0 +1,39 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_split_during_eviction_pages_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {
+        "type": "internal"
+      },
+      "value_path": [
+        "internal pages split during eviction"
+      ]
+    },
+    {
+      "labels": {
+        "type": "leaf"
+      },
+      "value_path": [
+        "leaf pages split during eviction"
+      ]
+    },
+    {
+      "labels": {
+        "type": "deepened the tree"
+      },
+      "value_path": [
+        "page split during eviction deepened the tree"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

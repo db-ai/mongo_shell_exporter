@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_reconciliation_dictionary_mateches",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "dictionary matches"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "reconciliation"
+  ]
+}

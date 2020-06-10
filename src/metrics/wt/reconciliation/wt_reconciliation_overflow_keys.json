@@ -1,0 +1,27 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_reconciliation_overflow_keys",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "internal-page overflow keys"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "leaf-page overflow keys"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "reconciliation"
+  ]
+}

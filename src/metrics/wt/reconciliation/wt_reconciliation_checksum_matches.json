@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_reconciliation_checksum_matches",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "page checksum matches"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "reconciliation"
+  ]
+}

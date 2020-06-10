@@ -1,0 +1,31 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_page_eviction_blocked_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {
+        "reason": "checkpoint"
+      },
+      "value_path": [
+        "checkpoint blocked page eviction"
+      ]
+    },
+    {
+      "labels": {
+        "reason": "hazard pointer"
+      },
+      "value_path": [
+        "hazard pointer blocked page eviction"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

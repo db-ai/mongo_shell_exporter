@@ -1,0 +1,60 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_eviction_worker_threads",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {
+        "state": "active",
+        "type": "gauge"
+      },
+      "value_path": [
+        "eviction worker thread active"
+      ]
+    },
+    {
+      "labels": {
+        "state": "created",
+        "type": "gauge"
+      },
+      "value_path": [
+        "eviction worker thread created"
+      ]
+    },
+    {
+      "labels": {
+        "state": "evicting",
+        "type": "gauge"
+      },
+      "value_path": [
+        "eviction worker thread evicting pages"
+      ]
+    },
+    {
+      "labels": {
+        "state": "removed",
+        "type": "gauge"
+      },
+      "value_path": [
+        "eviction worker thread removed"
+      ]
+    },
+    {
+      "labels": {
+        "state": "stable",
+        "type": "gauge"
+      },
+      "value_path": [
+        "eviction worker thread stable number"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

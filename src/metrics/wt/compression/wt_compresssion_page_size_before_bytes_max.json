@@ -1,0 +1,27 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_compresssion_page_size_before_bytes_max",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "compressed page maximum internal page size prior to compression"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "compressed page maximum leaf page size prior to compression "
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "compression"
+  ]
+}

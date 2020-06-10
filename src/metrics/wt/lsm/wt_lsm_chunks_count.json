@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_lsm_chunks_count",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "chunks in the LSM tree"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "LSM"
+  ]
+}

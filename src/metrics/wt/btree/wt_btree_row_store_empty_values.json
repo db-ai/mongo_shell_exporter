@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_btree_row_store_empty_values",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "row-store empty values"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "btree"
+  ]
+}

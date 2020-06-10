@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_seen_by_eviction_walk_already_queued_pages",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "internal pages seen by eviction walk that are already queued"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

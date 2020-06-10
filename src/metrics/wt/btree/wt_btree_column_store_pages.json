@@ -1,0 +1,33 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_btree_column_store_pages",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "column-store fixed-size leaf pages"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "column-store internal pages"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "column-store variable-size leaf pages"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "btree"
+  ]
+}

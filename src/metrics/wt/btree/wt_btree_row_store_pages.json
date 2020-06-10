@@ -1,0 +1,27 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_btree_row_store_pages",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "row-store internal pages"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "row-store leaf pages"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "btree"
+  ]
+}

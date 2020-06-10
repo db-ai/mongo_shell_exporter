@@ -1,0 +1,45 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_evicted_pages_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "internal pages evicted"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "modified pages evicted by application threads"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "modified pages evicted"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "pages evicted by application threads"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "unmodified pages evicted"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

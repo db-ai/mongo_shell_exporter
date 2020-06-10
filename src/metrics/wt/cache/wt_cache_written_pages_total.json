@@ -1,0 +1,37 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_written_pages_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "pages written from cache"
+      ]
+    },
+    {
+      "labels": {
+        "type": "requiring in-memory restoration"
+      },
+      "value_path": [
+        "pages written requiring in-memory restoration"
+      ]
+    },
+    {
+      "labels": {
+        "type": "requiring cache overflow records"
+      },
+      "value_path": [
+        "page written requiring cache overflow records"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cursor_ops_restarted",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "cursor operation restarted"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cursor"
+  ]
+}

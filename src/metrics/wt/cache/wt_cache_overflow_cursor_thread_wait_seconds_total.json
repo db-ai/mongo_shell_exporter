@@ -1,0 +1,27 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_overflow_cursor_thread_wait_seconds_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "cache overflow cursor application thread wait time (usecs)"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "cache overflow cursor internal thread wait time (usecs)"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

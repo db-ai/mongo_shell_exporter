@@ -1,0 +1,85 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_read_into_pages_total",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {
+        "event": "overflow"
+      },
+      "value_path": [
+        "overflow pages read into cache"
+      ]
+    },
+    {
+      "labels": {
+        "event": "after truncate in prepare state"
+      },
+      "value_path": [
+        "pages read into cache after truncate in prepare state"
+      ]
+    },
+    {
+      "labels": {
+        "event": "after truncate"
+      },
+      "value_path": [
+        "pages read into cache after truncate"
+      ]
+    },
+    {
+      "labels": {
+        "event": "requiring cache overflow entries"
+      },
+      "value_path": [
+        "pages read into cache requiring cache overflow entries"
+      ]
+    },
+    {
+      "labels": {
+        "event": "requiring cache overflow for checkpoint"
+      },
+      "value_path": [
+        "pages read into cache requiring cache overflow for checkpoint"
+      ]
+    },
+    {
+      "labels": {
+        "event": "skipping older cache overflow entries"
+      },
+      "value_path": [
+        "pages read into cache skipping older cache overflow entries"
+      ]
+    },
+    {
+      "labels": {
+        "event": "with skipped cache overflow entries needed later by checkpoint"
+      },
+      "value_path": [
+        "pages read into cache with skipped cache overflow entries needed later by checkpoint"
+      ]
+    },
+    {
+      "labels": {
+        "event": "with skipped cache overflow entries needed later"
+      },
+      "value_path": [
+        "pages read into cache with skipped cache overflow entries needed later"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "pages read into cache"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}

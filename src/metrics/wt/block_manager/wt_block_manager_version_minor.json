@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_block_manager_version_minor",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "minor version number"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "block-manager"
+  ]
+}

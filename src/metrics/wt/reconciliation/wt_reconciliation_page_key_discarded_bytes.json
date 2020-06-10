@@ -1,0 +1,27 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_reconciliation_page_key_discarded_bytes",
+  "type": "counter",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "internal page key bytes discarded using suffix compression"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "leaf page key bytes discarded using prefix compression"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "reconciliation"
+  ]
+}

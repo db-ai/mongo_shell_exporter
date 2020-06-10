@@ -1,0 +1,21 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_block_manager_reusable_bytes",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "file bytes available for reuse"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "block-manager"
+  ]
+}

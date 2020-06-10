@@ -1,0 +1,21 @@
+{
+  "source": [
+    "collectionStats.storageStats"
+  ],
+  "name": "collection_capped_max_count",
+  "type": "gauge",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "capped"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "max"
+      ]
+    }
+  ]
+}

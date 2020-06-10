@@ -1,0 +1,45 @@
+{
+  "sources": [
+    "serverStatus",
+    "collectionStats.storageStats",
+    "collectionStats.indexDetails"
+  ],
+  "name": "wt_cache_eviction_walk_target_pages",
+  "type": "histogram",
+  "map": [
+    {
+      "labels": {},
+      "value_path": [
+        "eviction walk target pages histogram - 0-9"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "eviction walk target pages histogram - 10-31"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "eviction walk target pages histogram - 32-63"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "eviction walk target pages histogram - 64-128"
+      ]
+    },
+    {
+      "labels": {},
+      "value_path": [
+        "eviction walk target pages histogram - 128 and higher"
+      ]
+    }
+  ],
+  "root": [
+    "wiredTiger",
+    "cache"
+  ]
+}
