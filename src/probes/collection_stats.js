@@ -26,6 +26,11 @@ export default class CollectionStatsProbe extends Probe {
     const storageStats = this.cutKey(collectionStats, 'storageStats')
     const indexDetails = this.cutKey(storageStats, 'indexDetails')
 
+    // TODO: Explicitly move to the `null` metric to terminate keys
+    delete storageStats.indexSizes
+    delete storageStats.indexBuilds
+    delete storageStats.wiredTiger.creationString
+
     const labels = {
       db: this.config.databaseName,
       coll: this.config.collectionName
@@ -37,6 +42,10 @@ export default class CollectionStatsProbe extends Probe {
 
     for (const indexName in indexDetails) {
       if (Object.prototype.hasOwnProperty.call(indexDetails, indexName)) {
+        // TODO: Explicitly move to the `null` metric to terminate keys
+        delete indexDetails[indexName].creationString
+        delete indexDetails[indexName].metadata.infoObj
+
         const indexStat = { wiredTiger: indexDetails[indexName] }
         const indexLabels = Object.merge(labels, { idx: indexName })
 
