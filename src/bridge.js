@@ -21,7 +21,8 @@ export default class Bridge {
     const tree = this.parseTree[source]
 
     if (tree === undefined) {
-      console.debug(`No parse tree for source: ${source}`)
+      const availableKeys = Object.keys(this.parseTree)
+      console.debug(`No parse tree for source: ${source} (${availableKeys})`)
       return
     }
 
