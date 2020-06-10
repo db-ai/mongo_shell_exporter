@@ -1,8 +1,6 @@
 {
   "sources": [
-    "serverStatus",
-    "collectionStats.storageStats",
-    "collectionStats.indexDetails"
+    "serverStatus"
   ],
   "name": "wt_cache_max_size_bytes",
   "type": "gauge",

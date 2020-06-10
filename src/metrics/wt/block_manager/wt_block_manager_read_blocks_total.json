@@ -1,8 +1,6 @@
 {
   "sources": [
-    "serverStatus",
-    "collectionStats.storageStats",
-    "collectionStats.indexDetails"
+    "serverStatus"
   ],
   "name": "wt_block_manager_read_blocks_total",
   "type": "counter",

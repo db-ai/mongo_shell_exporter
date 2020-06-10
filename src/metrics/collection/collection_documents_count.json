@@ -2,7 +2,7 @@
   "source": [
     "collectionStats.storageStats"
   ],
-  "name": "collection_count",
+  "name": "collection_documents_count",
   "type": "gauge",
   "map": [
     {

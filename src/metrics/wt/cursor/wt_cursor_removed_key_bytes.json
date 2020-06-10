@@ -1,6 +1,5 @@
 {
   "sources": [
-    "serverStatus",
     "collectionStats.storageStats",
     "collectionStats.indexDetails"
   ],
@@ -10,7 +9,7 @@
     {
       "labels": {},
       "value_path": [
-        "cursor-remove key bytes removed"
+        "remove key bytes removed"
       ]
     }
   ],

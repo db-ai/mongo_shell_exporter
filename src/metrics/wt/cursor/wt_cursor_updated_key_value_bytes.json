@@ -1,16 +1,15 @@
 {
   "sources": [
-    "serverStatus",
     "collectionStats.storageStats",
     "collectionStats.indexDetails"
   ],
-  "name": "wt_cursor_updated_value_bytes",
+  "name": "wt_cursor_updated_key_value_bytes",
   "type": "counter",
   "map": [
     {
       "labels": {},
       "value_path": [
-        "cursor-update value bytes updated"
+        "update key and value bytes"
       ]
     }
   ],

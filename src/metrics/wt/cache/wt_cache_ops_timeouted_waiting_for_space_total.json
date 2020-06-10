@@ -1,8 +1,6 @@
 {
   "sources": [
-    "serverStatus",
-    "collectionStats.storageStats",
-    "collectionStats.indexDetails"
+    "serverStatus"
   ],
   "name": "wt_cache_ops_timeouted_waiting_for_space_total",
   "type": "counter",

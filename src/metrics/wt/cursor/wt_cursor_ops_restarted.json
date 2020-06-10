@@ -1,8 +1,6 @@
 {
   "sources": [
-    "serverStatus",
-    "collectionStats.storageStats",
-    "collectionStats.indexDetails"
+    "serverStatus"
   ],
   "name": "wt_cursor_ops_restarted",
   "type": "counter",

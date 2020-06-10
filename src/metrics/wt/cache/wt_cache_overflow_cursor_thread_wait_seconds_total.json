@@ -1,8 +1,6 @@
 {
   "sources": [
-    "serverStatus",
-    "collectionStats.storageStats",
-    "collectionStats.indexDetails"
+    "serverStatus"
   ],
   "name": "wt_cache_overflow_cursor_thread_wait_seconds_total",
   "type": "counter",

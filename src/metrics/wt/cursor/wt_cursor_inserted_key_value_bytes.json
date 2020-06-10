@@ -1,6 +1,5 @@
 {
   "sources": [
-    "serverStatus",
     "collectionStats.storageStats",
     "collectionStats.indexDetails"
   ],
@@ -10,7 +9,7 @@
     {
       "labels": {},
       "value_path": [
-        "cursor-insert key and value bytes inserted"
+        "insert key and value bytes"
       ]
     }
   ],
