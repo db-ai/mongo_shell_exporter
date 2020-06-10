@@ -1,0 +1,23 @@
+{
+  "name": "wt_info",
+  "type": "gauge",
+  "sources": ["collectionStats.storageStats", "collectionStats.indexDetails"],
+
+  "help": "",
+  "link": "",
+
+  "root": ["wiredTiger"],
+  "map": [
+    {
+      "value": 1,
+      "labels_paths": [
+        { "label": "type", "value_path": ["type"] },
+        { "label": "uri", "value_path": ["uri"] },
+        {
+          "label": "format_version",
+          "value_path": ["metadata", "formatVersion"]
+        }
+      ]
+    }
+  ]
+}
