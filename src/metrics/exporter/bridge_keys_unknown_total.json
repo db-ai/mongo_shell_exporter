@@ -1,0 +1,7 @@
+{
+  "name": "bridge_keys_unknown_total",
+  "type": "gauge",
+
+  "help": "",
+  "link": ""
+}

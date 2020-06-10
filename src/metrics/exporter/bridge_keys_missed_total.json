@@ -1,0 +1,7 @@
+{
+  "name": "bridge_keys_missed_total",
+  "type": "gauge",
+
+  "help": "",
+  "link": ""
+}

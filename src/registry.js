@@ -108,7 +108,7 @@ export default class Registry {
       if (rule.value_path) {
         const path = rootPath.concat(rule.value_path)
 
-        this.createSourceTreePath(path, function (
+        this.createSourceTreePath(metric.name, path, function (
           sourceValue,
           sourceLabels = {}
         ) {
@@ -121,7 +121,7 @@ export default class Registry {
         for (const labelRule of rule.labels_paths) {
           const path = rootPath.concat(labelRule.value_path)
 
-          this.createSourceTreePath(path, function (
+          this.createSourceTreePath(metric.name, path, function (
             sourceValue,
             sourceLabels = {}
           ) {
@@ -141,7 +141,7 @@ export default class Registry {
     }
   }
 
-  createSourceTreePath (path, callback) {
+  createSourceTreePath (metricName, path, callback) {
     let treeLevel = this.parseTree
     const targetKey = path.pop()
 
@@ -159,7 +159,7 @@ export default class Registry {
       treeLevel = treeLevel[pathLevel]
     }
 
-    treeLevel[targetKey] = callback
+    treeLevel[targetKey] = { name: metricName, callback: callback }
     return true
   }
 }
