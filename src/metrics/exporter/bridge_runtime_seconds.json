@@ -1,6 +1,6 @@
 {
   "name": "bridge_runtime_seconds",
-  "type": "counter",
+  "type": "gauge",
 
   "help": "",
   "link": ""

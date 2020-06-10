@@ -1,6 +1,6 @@
 {
   "name": "probe_runs_total",
-  "type": "counter",
+  "type": "gauge",
 
   "help": "",
   "link": ""

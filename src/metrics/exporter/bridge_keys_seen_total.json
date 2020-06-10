@@ -1,6 +1,6 @@
 {
   "name": "bridge_keys_seen_total",
-  "type": "counter",
+  "type": "gauge",
 
   "help": "",
   "link": ""

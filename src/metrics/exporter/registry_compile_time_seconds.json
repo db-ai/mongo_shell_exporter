@@ -1,0 +1,7 @@
+{
+  "name": "registry_compile_time_seconds",
+  "type": "gauge",
+
+  "help": "",
+  "link": ""
+}
