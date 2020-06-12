@@ -7,8 +7,13 @@ export default class Exporter {
     this._runtimeMetric = Metric.newOfType({
       type: 'counter',
       name: 'export_flush_runtime_seconds',
-      help: 'Time spent printing metrics to stdout'
+      help: 'Time spent printing metrics to stdout',
+      internal: true
     })
+
+    this._runtimeMetric.enabled = true
+
+    this.prefix = registry.config.prefix || ''
   }
 
   export () {
@@ -30,15 +35,21 @@ export default class Exporter {
   }
 
   outputMetric (metric) {
+    if (!metric.enabled) return
+
     if (metric.help) {
-      print(`# HELP ${metric.name} ${metric.help}`)
+      print(`# HELP ${this.prefixedName(metric)} ${metric.help}`)
     }
 
-    print(`# TYPE ${metric.name} ${metric.type}`)
+    print(`# TYPE ${this.prefixedName(metric)} ${metric.type}`)
 
     for (const serie of metric.series) {
       if (serie.value === undefined) continue
-      print(`${metric.name}${serie.stringLabels} ${serie.value}`)
+      print(`${this.prefixedName(metric)}${serie.stringLabels} ${serie.value}`)
     }
+  }
+
+  prefixedName (metric) {
+    return `${this.prefix}${metric.name}`
   }
 }

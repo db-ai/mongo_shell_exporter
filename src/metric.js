@@ -21,12 +21,19 @@ export default class Metric {
         throw new Error(`Unsupported metric type '${typeName}'`)
     }
 
-    const metric = new Metric(metricType, typeName, config.name, config.help, config)
+    const metric = new Metric(
+      metricType,
+      typeName,
+      config.name,
+      config.help,
+      config
+    )
 
     return metric
   }
 
   constructor (TypeClassName, typeName, name, help, config) {
+    this.enabled = false
     this.TypeClassName = TypeClassName
     this._name = name
     this._help = help
@@ -61,6 +68,10 @@ export default class Metric {
     return this.labeledValues.values()
   }
 
+  get isInternal () {
+    return this.config.internal === true
+  }
+
   setValue (seriesLabels, newValue) {
     const serie = this.findOrCreateSerie(seriesLabels)
     serie.value = newValue
@@ -79,7 +90,7 @@ export default class Metric {
     let serie = this.labeledValues.get(labels)
     if (serie !== null) return serie
 
-    serie = new this.TypeClassName(labels)
+    serie = new this.TypeClassName(Object.assign({}, labels))
     this.labeledValues.put(labels, serie)
 
     return serie

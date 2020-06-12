@@ -1,0 +1,14 @@
+{
+  "prefix": "mongodb_",
+  "metrics": {
+    "block": [],
+    "allow": ["*"]
+  },
+
+  "namespaces": {
+    "block": [],
+    "allow": ["*"]
+  },
+
+  "customMetrics": []
+}

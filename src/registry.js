@@ -1,5 +1,6 @@
 import Metric from 'src/metric'
 import TimeMeter from 'src/time_meter'
+import ExporterConfig from 'src/registry/config'
 
 const _registredMetrics = {}
 
@@ -54,8 +55,8 @@ export default class Registry {
     }
   }
 
-  constructor (config = {}) {
-    this._config = config
+  constructor (configMap = {}) {
+    this.config = new ExporterConfig(configMap)
     this._metrics = Registry.metrics
     this._parseTree = {}
   }
@@ -78,9 +79,19 @@ export default class Registry {
     const values = Object.values(this.metrics)
 
     for (const metric of values) {
+      if (!metric.isInternal && this.config.metricDisabled(metric.name)) {
+        continue
+      }
+
+      metric.enabled = true
+
       if (metric.config.map_groups !== undefined) {
+        const originalMap = metric.config.map
         this.parseMapGroups(metric.config.map_groups, metric)
-      } else if (metric.config.sources !== undefined) {
+        metric.config.map = originalMap
+      }
+
+      if (metric.config.sources !== undefined) {
         this.parseMultipleSources(metric.config.sources, metric)
       } else if (metric.config.source !== undefined) {
         this.parseMerticConfig(metric)
@@ -88,8 +99,9 @@ export default class Registry {
     }
 
     compilationRuntime.stop()
+    const compiledSeconds = compilationRuntime.runtimeSeconds
 
-    this.getMetric('registry_compile_time_seconds').value = compilationRuntime.runtimeSeconds
+    this.getMetric('registry_compile_time_seconds').value = compiledSeconds
   }
 
   parseMapGroups (groups, metric) {
@@ -124,39 +136,41 @@ export default class Registry {
       ruleIndex = ruleIndex + 1
 
       if (rule.value_path) {
-        const path = rootPath.concat(rule.value_path)
-
-        this.createSourceTreePath(metric.name, path, function (
-          sourceValue,
-          sourceLabels = {}
-        ) {
-          const metricLabels = Object.merge(sourceLabels, rule.labels)
-          metric.setValue(metricLabels, sourceValue)
-        })
+        this.addByValuePath(rootPath, rule, metric)
       } else if (rule.labels_paths) {
-        const metricValue = rule.value
-
-        for (const labelRule of rule.labels_paths) {
-          const path = rootPath.concat(labelRule.value_path)
-
-          this.createSourceTreePath(metric.name, path, function (
-            sourceValue,
-            sourceLabels = {}
-          ) {
-            metric.setLabelValue(
-              sourceLabels,
-              metricValue,
-              labelRule.label,
-              sourceValue
-            )
-          })
-        }
+        this.addByLabelPath(rootPath, rule, metric)
       } else {
         throw new Error(
           `Rule #${ruleIndex} in '${config.name}' doesn't have nor value_path or labels_paths.`
         )
       }
     }
+  }
+
+  addByLabelPath (rootPath, rule, metric) {
+    const value = rule.value
+
+    for (const labelRule of rule.labels_paths) {
+      const path = rootPath.concat(labelRule.value_path)
+      const labelKey = labelRule.label
+
+      const setValue = function (sourceValue, sourceLabels = {}) {
+        metric.setLabelValue(sourceLabels, value, labelKey, sourceValue)
+      }
+
+      this.createSourceTreePath(metric.name, path, setValue)
+    }
+  }
+
+  addByValuePath (rootPath, rule, metric) {
+    const path = rootPath.concat(rule.value_path)
+
+    const setValue = function (sourceValue, sourceLabels = {}) {
+      const metricLabels = Object.merge(sourceLabels, rule.labels)
+      metric.setValue(metricLabels, sourceValue)
+    }
+
+    this.createSourceTreePath(metric.name, path, setValue)
   }
 
   createSourceTreePath (metricName, path, callback) {
