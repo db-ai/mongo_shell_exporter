@@ -1,0 +1,16 @@
+{
+  "name": "server_net_connections",
+  "type": "gauge",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "root": ["connections"],
+
+  "map": [
+    { "labels": { "state": "current" }, "value_path": ["current"] },
+    { "labels": { "state": "available" }, "value_path": ["available"] },
+    { "labels": { "state": "active" }, "value_path": ["active"] }
+  ]
+}

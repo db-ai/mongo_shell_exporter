@@ -6,6 +6,12 @@ Registry.createMetric(require('src/metrics/server/server_time.json'))
 Registry.createMetric(require('src/metrics/server/server_uptime.json'))
 
 Registry.createMetric(
+  require('src/metrics/server/net/server_net_connections.json')
+)
+Registry.createMetric(
+  require('src/metrics/server/net/server_net_connections_created.json')
+)
+Registry.createMetric(
   require('src/metrics/server/net/server_net_requests_total.json')
 )
 Registry.createMetric(

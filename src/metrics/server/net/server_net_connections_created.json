@@ -1,0 +1,12 @@
+{
+  "name": "server_net_connections_created",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "root": ["connections"],
+
+  "map": [{ "labels": {}, "value_path": ["totalCreated"] }]
+}
