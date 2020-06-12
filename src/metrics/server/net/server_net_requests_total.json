@@ -1,0 +1,11 @@
+{
+  "name": "server_net_requests_total",
+  "type": "counter",
+  "source": "serverStatus",
+  "root": ["network"],
+
+  "help": "",
+  "link": "",
+
+  "map": [{ "labels": {}, "value_path": ["numRequests"] }]
+}
