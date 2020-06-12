@@ -1,15 +1,11 @@
 {
-  "source": [
-    "collectionStats.storageStats"
-  ],
+  "source": ["collectionStats.storageStats"],
   "name": "collection_index_count",
   "type": "gauge",
   "map": [
     {
       "labels": {},
-      "value_path": [
-        "nindexes"
-      ]
+      "value_path": ["nindexes"]
     }
   ]
 }

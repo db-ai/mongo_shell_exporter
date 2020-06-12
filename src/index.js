@@ -25,22 +25,30 @@ try {
   console.debug('Exporter OK')
 
   print('# TYPE mongo_shell_exporter_info gauge')
-  print(`mongo_shell_exporter_info{version="${exporterPackage.version}", shell="${version()}"} 1`)
+  print(
+    `mongodb_shell_exporter_info{version="${
+      exporterPackage.version
+    }", shell="${version()}"} 1`
+  )
 
-  print('# TYPE mongo_shell_exporter_ok gauge')
-  print('mongo_shell_exporter_ok 1')
+  print('# TYPE mongodb_shell_exporter_ok gauge')
+  print('mongodb_shell_exporter_ok 1')
 
   quit(0)
 } catch (err) {
   const message = err.message.replace(/"/g, '')
   const stack = err.stack.replace(/\n/g, ';')
 
-  print('# HELP mongo_shell_exporter_error_info Add information about error happened in exporter')
+  print(
+    '# HELP mongodb_shell_exporter_error_info Add information about error happened in exporter'
+  )
   print('# TYPE mongo_shell_exporter_error_info gauge')
-  print(`mongo_shell_exporter_error_info{error="${err.name}", message="${message}", stack="${stack}"} 1`)
+  print(
+    `mongodb_shell_exporter_error_info{error="${err.name}", message="${message}", stack="${stack}"} 1`
+  )
 
   print('# TYPE mongo_shell_exporter_ok gauge')
-  print('mongo_shell_exporter_ok 0')
+  print('mongodb_shell_exporter_ok 0')
 
   quit(1)
 }
