@@ -1,13 +1,11 @@
 {
-  "sources": [
-    "serverStatus"
-  ],
+  "sources": ["serverStatus"],
   "name": "wt_cache_eviction_failed_pages_total",
   "type": "counter",
   "map": [
     {
       "labels": {
-        "reason": "as the parent page has overflow items"
+        "reason": "parent page has overflow items"
       },
       "value_path": [
         "pages selected for eviction unable to be evicted as the parent page has overflow items"
@@ -15,7 +13,7 @@
     },
     {
       "labels": {
-        "reason": "because of active children on an internal page"
+        "reason": "active children on an internal page"
       },
       "value_path": [
         "pages selected for eviction unable to be evicted because of active children on an internal page"
@@ -23,7 +21,7 @@
     },
     {
       "labels": {
-        "reason": "evicted because of failure in reconciliation"
+        "reason": "failure in reconciliation"
       },
       "value_path": [
         "pages selected for eviction unable to be evicted because of failure in reconciliation"
@@ -31,7 +29,7 @@
     },
     {
       "labels": {
-        "reason": "due to newer modifications on a clean page"
+        "reason": "newer modifications on a clean page"
       },
       "value_path": [
         "pages selected for eviction unable to be evicted due to newer modifications on a clean page"
@@ -39,13 +37,8 @@
     },
     {
       "labels": {},
-      "value_path": [
-        "pages selected for eviction unable to be evicted"
-      ]
+      "value_path": ["pages selected for eviction unable to be evicted"]
     }
   ],
-  "root": [
-    "wiredTiger",
-    "cache"
-  ]
+  "root": ["wiredTiger", "cache"]
 }

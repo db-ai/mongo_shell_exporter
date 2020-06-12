@@ -1,20 +1,56 @@
 import Registry from 'src/registry.js'
 
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_preloaded_blocks_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_read_blocks_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_written_blocks_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_read_bytes_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_written_bytes_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_written_for_checkpoint_bytes_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_read_mapped_blocks_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_read_mapped_bytes_count_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_file_extenstions_count.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_allocated_blocks_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_freed_blocks_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_checkpoint_size_bytes_total.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_reusable_bytes.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_file_size_bytes.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_allocation_unit_size.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_file_magic_number.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_version_major.json'))
-Registry.createMetric(require('src/metrics/wt/block_manager/wt_block_manager_version_minor.json'))
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_allocated_blocks_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_allocation_unit_size.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_checkpoint_size_bytes.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_file_extenstions_count.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_file_magic_number.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_file_size_bytes.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_freed_blocks_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_preloaded_blocks_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_read_blocks_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_read_bytes_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_read_mapped_blocks_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_read_mapped_bytes_count_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_reusable_bytes.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_version_major.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_version_minor.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_written_blocks_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_written_bytes_total.json')
+)
+Registry.createMetric(
+  require('src/metrics/wt/block_manager/wt_block_manager_written_for_checkpoint_bytes_total.json')
+)

@@ -1,7 +1,5 @@
 {
-  "sources": [
-    "serverStatus"
-  ],
+  "sources": ["serverStatus"],
   "name": "wt_cache_eviction_walk_strategy",
   "type": "counter",
   "map": [
@@ -9,29 +7,20 @@
       "labels": {
         "type": "clean and dirty"
       },
-      "value_path": [
-        "eviction walk target strategy both clean and dirty pages"
-      ]
+      "value_path": ["eviction walk target strategy both clean and dirty pages"]
     },
     {
       "labels": {
-        "type": "only clean"
+        "type": "clean"
       },
-      "value_path": [
-        "eviction walk target strategy only clean pages"
-      ]
+      "value_path": ["eviction walk target strategy only clean pages"]
     },
     {
       "labels": {
-        "type": "only dirty"
+        "type": "dirty"
       },
-      "value_path": [
-        "eviction walk target strategy only dirty pages"
-      ]
+      "value_path": ["eviction walk target strategy only dirty pages"]
     }
   ],
-  "root": [
-    "wiredTiger",
-    "cache"
-  ]
+  "root": ["wiredTiger", "cache"]
 }

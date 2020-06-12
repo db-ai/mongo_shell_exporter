@@ -1,25 +1,16 @@
 {
-  "sources": [
-    "serverStatus"
-  ],
+  "sources": ["serverStatus"],
   "name": "wt_cache_eviction_walk_pages_seen",
   "type": "counter",
   "map": [
     {
-      "labels": {},
-      "value_path": [
-        "pages seen by eviction walk that are already queued"
-      ]
+      "labels": { "type": "already queued" },
+      "value_path": ["pages seen by eviction walk that are already queued"]
     },
     {
       "labels": {},
-      "value_path": [
-        "pages seen by eviction walk"
-      ]
+      "value_path": ["pages seen by eviction walk"]
     }
   ],
-  "root": [
-    "wiredTiger",
-    "cache"
-  ]
+  "root": ["wiredTiger", "cache"]
 }

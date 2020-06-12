@@ -1,19 +1,12 @@
 {
-  "sources": [
-    "serverStatus"
-  ],
+  "sources": ["serverStatus"],
   "name": "wt_cache_hazard_pointer_check_entries_walked_total",
-  "type": "counter",
+  "type": "gauge",
   "map": [
     {
       "labels": {},
-      "value_path": [
-        "hazard pointer check entries walked"
-      ]
+      "value_path": ["hazard pointer check entries walked"]
     }
   ],
-  "root": [
-    "wiredTiger",
-    "cache"
-  ]
+  "root": ["wiredTiger", "cache"]
 }

@@ -1,20 +1,12 @@
 {
-  "sources": [
-    "collectionStats.storageStats",
-    "collectionStats.indexDetails"
-  ],
+  "sources": ["collectionStats.storageStats", "collectionStats.indexDetails"],
   "name": "wt_block_manager_version_major",
-  "type": "counter",
+  "type": "gauge",
   "map": [
     {
       "labels": {},
-      "value_path": [
-        "file major version number"
-      ]
+      "value_path": ["file major version number"]
     }
   ],
-  "root": [
-    "wiredTiger",
-    "block-manager"
-  ]
+  "root": ["wiredTiger", "block-manager"]
 }

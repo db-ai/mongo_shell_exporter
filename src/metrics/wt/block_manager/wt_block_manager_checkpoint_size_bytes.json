@@ -1,11 +1,11 @@
 {
   "sources": ["collectionStats.storageStats", "collectionStats.indexDetails"],
-  "name": "wt_block_manager_file_magic_number",
+  "name": "wt_block_manager_checkpoint_size_bytes",
   "type": "gauge",
   "map": [
     {
       "labels": {},
-      "value_path": ["file magic number"]
+      "value_path": ["checkpoint size"]
     }
   ],
   "root": ["wiredTiger", "block-manager"]
