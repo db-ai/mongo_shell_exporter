@@ -1,5 +1,6 @@
 import Registry from 'src/registry.js'
 
+require('src/metrics/server/commands')
 require('src/metrics/server/net')
 require('src/metrics/server/operations')
 require('src/metrics/server/transactions')

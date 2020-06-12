@@ -1,0 +1,599 @@
+{
+  "name": "server_commands_total",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "Total number of database commands executed by server by command name",
+  "link": "https://docs.mongodb.com/manual/reference/command/serverStatus/#serverstatus.metrics.commands",
+
+  "root": ["metrics", "commands"],
+
+  "map": [
+    { "labels": { "cmd": "<UNKNOWN>" }, "value_path": ["<UNKNOWN>"] },
+    { "labels": { "cmd": "_addShard" }, "value_path": ["_addShard", "total"] },
+    {
+      "labels": { "cmd": "_cloneCatalogData" },
+      "value_path": ["_cloneCatalogData", "total"]
+    },
+    {
+      "labels": { "cmd": "_cloneCollectionOptionsFromPrimaryShard" },
+      "value_path": ["_cloneCollectionOptionsFromPrimaryShard", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrAddShard" },
+      "value_path": ["_configsvrAddShard", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrAddShardToZone" },
+      "value_path": ["_configsvrAddShardToZone", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrBalancerStart" },
+      "value_path": ["_configsvrBalancerStart", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrBalancerStatus" },
+      "value_path": ["_configsvrBalancerStatus", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrBalancerStop" },
+      "value_path": ["_configsvrBalancerStop", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrClearJumboFlag" },
+      "value_path": ["_configsvrClearJumboFlag", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrCommitChunkMerge" },
+      "value_path": ["_configsvrCommitChunkMerge", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrCommitChunkMigration" },
+      "value_path": ["_configsvrCommitChunkMigration", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrCommitChunkSplit" },
+      "value_path": ["_configsvrCommitChunkSplit", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrCommitMovePrimary" },
+      "value_path": ["_configsvrCommitMovePrimary", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrCreateCollection" },
+      "value_path": ["_configsvrCreateCollection", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrCreateDatabase" },
+      "value_path": ["_configsvrCreateDatabase", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrDropCollection" },
+      "value_path": ["_configsvrDropCollection", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrDropDatabase" },
+      "value_path": ["_configsvrDropDatabase", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrEnableSharding" },
+      "value_path": ["_configsvrEnableSharding", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrMoveChunk" },
+      "value_path": ["_configsvrMoveChunk", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrMovePrimary" },
+      "value_path": ["_configsvrMovePrimary", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrRemoveShard" },
+      "value_path": ["_configsvrRemoveShard", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrRemoveShardFromZone" },
+      "value_path": ["_configsvrRemoveShardFromZone", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrShardCollection" },
+      "value_path": ["_configsvrShardCollection", "total"]
+    },
+    {
+      "labels": { "cmd": "_configsvrUpdateZoneKeyRange" },
+      "value_path": ["_configsvrUpdateZoneKeyRange", "total"]
+    },
+    {
+      "labels": { "cmd": "_flushDatabaseCacheUpdates" },
+      "value_path": ["_flushDatabaseCacheUpdates", "total"]
+    },
+    {
+      "labels": { "cmd": "_flushRoutingTableCacheUpdates" },
+      "value_path": ["_flushRoutingTableCacheUpdates", "total"]
+    },
+    {
+      "labels": { "cmd": "_getNextSessionMods" },
+      "value_path": ["_getNextSessionMods", "total"]
+    },
+    {
+      "labels": { "cmd": "_getUserCacheGeneration" },
+      "value_path": ["_getUserCacheGeneration", "total"]
+    },
+    { "labels": { "cmd": "_isSelf" }, "value_path": ["_isSelf", "total"] },
+    {
+      "labels": { "cmd": "_mergeAuthzCollections" },
+      "value_path": ["_mergeAuthzCollections", "total"]
+    },
+    {
+      "labels": { "cmd": "_migrateClone" },
+      "value_path": ["_migrateClone", "total"]
+    },
+    {
+      "labels": { "cmd": "_movePrimary" },
+      "value_path": ["_movePrimary", "total"]
+    },
+    {
+      "labels": { "cmd": "_recvChunkAbort" },
+      "value_path": ["_recvChunkAbort", "total"]
+    },
+    {
+      "labels": { "cmd": "_recvChunkCommit" },
+      "value_path": ["_recvChunkCommit", "total"]
+    },
+    {
+      "labels": { "cmd": "_recvChunkStart" },
+      "value_path": ["_recvChunkStart", "total"]
+    },
+    {
+      "labels": { "cmd": "_recvChunkStatus" },
+      "value_path": ["_recvChunkStatus", "total"]
+    },
+    {
+      "labels": { "cmd": "_shardsvrShardCollection" },
+      "value_path": ["_shardsvrShardCollection", "total"]
+    },
+    {
+      "labels": { "cmd": "_transferMods" },
+      "value_path": ["_transferMods", "total"]
+    },
+    {
+      "labels": { "cmd": "abortTransaction" },
+      "value_path": ["abortTransaction", "total"]
+    },
+    { "labels": { "cmd": "aggregate" }, "value_path": ["aggregate", "total"] },
+    {
+      "labels": { "cmd": "appendOplogNote" },
+      "value_path": ["appendOplogNote", "total"]
+    },
+    { "labels": { "cmd": "applyOps" }, "value_path": ["applyOps", "total"] },
+    {
+      "labels": { "cmd": "authenticate" },
+      "value_path": ["authenticate", "total"]
+    },
+    {
+      "labels": { "cmd": "availableQueryOptions" },
+      "value_path": ["availableQueryOptions", "total"]
+    },
+    { "labels": { "cmd": "buildInfo" }, "value_path": ["buildInfo", "total"] },
+    {
+      "labels": { "cmd": "checkShardingIndex" },
+      "value_path": ["checkShardingIndex", "total"]
+    },
+    {
+      "labels": { "cmd": "cleanupOrphaned" },
+      "value_path": ["cleanupOrphaned", "total"]
+    },
+    {
+      "labels": { "cmd": "cloneCollection" },
+      "value_path": ["cloneCollection", "total"]
+    },
+    {
+      "labels": { "cmd": "cloneCollectionAsCapped" },
+      "value_path": ["cloneCollectionAsCapped", "total"]
+    },
+    { "labels": { "cmd": "collMod" }, "value_path": ["collMod", "total"] },
+    { "labels": { "cmd": "collStats" }, "value_path": ["collStats", "total"] },
+    {
+      "labels": { "cmd": "commitTransaction" },
+      "value_path": ["commitTransaction", "total"]
+    },
+    { "labels": { "cmd": "compact" }, "value_path": ["compact", "total"] },
+    {
+      "labels": { "cmd": "connPoolStats" },
+      "value_path": ["connPoolStats", "total"]
+    },
+    {
+      "labels": { "cmd": "connPoolSync" },
+      "value_path": ["connPoolSync", "total"]
+    },
+    {
+      "labels": { "cmd": "connectionStatus" },
+      "value_path": ["connectionStatus", "total"]
+    },
+    {
+      "labels": { "cmd": "convertToCapped" },
+      "value_path": ["convertToCapped", "total"]
+    },
+    {
+      "labels": { "cmd": "coordinateCommitTransaction" },
+      "value_path": ["coordinateCommitTransaction", "total"]
+    },
+    { "labels": { "cmd": "count" }, "value_path": ["count", "total"] },
+    { "labels": { "cmd": "create" }, "value_path": ["create", "total"] },
+    {
+      "labels": { "cmd": "createIndexes" },
+      "value_path": ["createIndexes", "total"]
+    },
+    {
+      "labels": { "cmd": "createRole" },
+      "value_path": ["createRole", "total"]
+    },
+    {
+      "labels": { "cmd": "createUser" },
+      "value_path": ["createUser", "total"]
+    },
+    { "labels": { "cmd": "currentOp" }, "value_path": ["currentOp", "total"] },
+    { "labels": { "cmd": "dataSize" }, "value_path": ["dataSize", "total"] },
+    { "labels": { "cmd": "dbHash" }, "value_path": ["dbHash", "total"] },
+    { "labels": { "cmd": "dbStats" }, "value_path": ["dbStats", "total"] },
+    { "labels": { "cmd": "delete" }, "value_path": ["delete", "total"] },
+    { "labels": { "cmd": "distinct" }, "value_path": ["distinct", "total"] },
+    {
+      "labels": { "cmd": "driverOIDTest" },
+      "value_path": ["driverOIDTest", "total"]
+    },
+    { "labels": { "cmd": "drop" }, "value_path": ["drop", "total"] },
+    {
+      "labels": { "cmd": "dropAllRolesFromDatabase" },
+      "value_path": ["dropAllRolesFromDatabase", "total"]
+    },
+    {
+      "labels": { "cmd": "dropAllUsersFromDatabase" },
+      "value_path": ["dropAllUsersFromDatabase", "total"]
+    },
+    {
+      "labels": { "cmd": "dropConnections" },
+      "value_path": ["dropConnections", "total"]
+    },
+    {
+      "labels": { "cmd": "dropDatabase" },
+      "value_path": ["dropDatabase", "total"]
+    },
+    {
+      "labels": { "cmd": "dropIndexes" },
+      "value_path": ["dropIndexes", "total"]
+    },
+    { "labels": { "cmd": "dropRole" }, "value_path": ["dropRole", "total"] },
+    { "labels": { "cmd": "dropUser" }, "value_path": ["dropUser", "total"] },
+    {
+      "labels": { "cmd": "endSessions" },
+      "value_path": ["endSessions", "total"]
+    },
+    { "labels": { "cmd": "explain" }, "value_path": ["explain", "total"] },
+    { "labels": { "cmd": "features" }, "value_path": ["features", "total"] },
+    { "labels": { "cmd": "filemd5" }, "value_path": ["filemd5", "total"] },
+    { "labels": { "cmd": "find" }, "value_path": ["find", "total"] },
+    {
+      "labels": { "cmd": "findAndModify" },
+      "value_path": ["findAndModify", "total"]
+    },
+    {
+      "labels": { "cmd": "flushRouterConfig" },
+      "value_path": ["flushRouterConfig", "total"]
+    },
+    { "labels": { "cmd": "fsync" }, "value_path": ["fsync", "total"] },
+    {
+      "labels": { "cmd": "fsyncUnlock" },
+      "value_path": ["fsyncUnlock", "total"]
+    },
+    { "labels": { "cmd": "geoSearch" }, "value_path": ["geoSearch", "total"] },
+    {
+      "labels": { "cmd": "getCmdLineOpts" },
+      "value_path": ["getCmdLineOpts", "total"]
+    },
+    {
+      "labels": { "cmd": "getDatabaseVersion" },
+      "value_path": ["getDatabaseVersion", "total"]
+    },
+    {
+      "labels": { "cmd": "getDiagnosticData" },
+      "value_path": ["getDiagnosticData", "total"]
+    },
+    {
+      "labels": { "cmd": "getFreeMonitoringStatus" },
+      "value_path": ["getFreeMonitoringStatus", "total"]
+    },
+    {
+      "labels": { "cmd": "getLastError" },
+      "value_path": ["getLastError", "total"]
+    },
+    { "labels": { "cmd": "getLog" }, "value_path": ["getLog", "total"] },
+    { "labels": { "cmd": "getMore" }, "value_path": ["getMore", "total"] },
+    {
+      "labels": { "cmd": "getParameter" },
+      "value_path": ["getParameter", "total"]
+    },
+    {
+      "labels": { "cmd": "getShardMap" },
+      "value_path": ["getShardMap", "total"]
+    },
+    {
+      "labels": { "cmd": "getShardVersion" },
+      "value_path": ["getShardVersion", "total"]
+    },
+    { "labels": { "cmd": "getnonce" }, "value_path": ["getnonce", "total"] },
+    {
+      "labels": { "cmd": "grantPrivilegesToRole" },
+      "value_path": ["grantPrivilegesToRole", "total"]
+    },
+    {
+      "labels": { "cmd": "grantRolesToRole" },
+      "value_path": ["grantRolesToRole", "total"]
+    },
+    {
+      "labels": { "cmd": "grantRolesToUser" },
+      "value_path": ["grantRolesToUser", "total"]
+    },
+    { "labels": { "cmd": "hostInfo" }, "value_path": ["hostInfo", "total"] },
+    { "labels": { "cmd": "insert" }, "value_path": ["insert", "total"] },
+    {
+      "labels": { "cmd": "invalidateUserCache" },
+      "value_path": ["invalidateUserCache", "total"]
+    },
+    { "labels": { "cmd": "isMaster" }, "value_path": ["isMaster", "total"] },
+    {
+      "labels": { "cmd": "killAllSessions" },
+      "value_path": ["killAllSessions", "total"]
+    },
+    {
+      "labels": { "cmd": "killAllSessionsByPattern" },
+      "value_path": ["killAllSessionsByPattern", "total"]
+    },
+    {
+      "labels": { "cmd": "killCursors" },
+      "value_path": ["killCursors", "total"]
+    },
+    { "labels": { "cmd": "killOp" }, "value_path": ["killOp", "total"] },
+    {
+      "labels": { "cmd": "killSessions" },
+      "value_path": ["killSessions", "total"]
+    },
+    {
+      "labels": { "cmd": "listCollections" },
+      "value_path": ["listCollections", "total"]
+    },
+    {
+      "labels": { "cmd": "listCommands" },
+      "value_path": ["listCommands", "total"]
+    },
+    {
+      "labels": { "cmd": "listDatabases" },
+      "value_path": ["listDatabases", "total"]
+    },
+    {
+      "labels": { "cmd": "listIndexes" },
+      "value_path": ["listIndexes", "total"]
+    },
+    { "labels": { "cmd": "lockInfo" }, "value_path": ["lockInfo", "total"] },
+    { "labels": { "cmd": "logRotate" }, "value_path": ["logRotate", "total"] },
+    { "labels": { "cmd": "logout" }, "value_path": ["logout", "total"] },
+    { "labels": { "cmd": "mapReduce" }, "value_path": ["mapReduce", "total"] },
+    {
+      "labels": { "cmd": "mapreduce.shardedfinish" },
+      "value_path": ["mapreduce", "shardedfinish", "total"]
+    },
+    {
+      "labels": { "cmd": "mergeChunks" },
+      "value_path": ["mergeChunks", "total"]
+    },
+    { "labels": { "cmd": "moveChunk" }, "value_path": ["moveChunk", "total"] },
+    { "labels": { "cmd": "ping" }, "value_path": ["ping", "total"] },
+    {
+      "labels": { "cmd": "planCacheClear" },
+      "value_path": ["planCacheClear", "total"]
+    },
+    {
+      "labels": { "cmd": "planCacheClearFilters" },
+      "value_path": ["planCacheClearFilters", "total"]
+    },
+    {
+      "labels": { "cmd": "planCacheListFilters" },
+      "value_path": ["planCacheListFilters", "total"]
+    },
+    {
+      "labels": { "cmd": "planCacheListPlans" },
+      "value_path": ["planCacheListPlans", "total"]
+    },
+    {
+      "labels": { "cmd": "planCacheListQueryShapes" },
+      "value_path": ["planCacheListQueryShapes", "total"]
+    },
+    {
+      "labels": { "cmd": "planCacheSetFilter" },
+      "value_path": ["planCacheSetFilter", "total"]
+    },
+    {
+      "labels": { "cmd": "prepareTransaction" },
+      "value_path": ["prepareTransaction", "total"]
+    },
+    { "labels": { "cmd": "profile" }, "value_path": ["profile", "total"] },
+    { "labels": { "cmd": "reIndex" }, "value_path": ["reIndex", "total"] },
+    {
+      "labels": { "cmd": "refreshSessions" },
+      "value_path": ["refreshSessions", "total"]
+    },
+    {
+      "labels": { "cmd": "renameCollection" },
+      "value_path": ["renameCollection", "total"]
+    },
+    {
+      "labels": { "cmd": "repairCursor" },
+      "value_path": ["repairCursor", "total"]
+    },
+    {
+      "labels": { "cmd": "repairDatabase" },
+      "value_path": ["repairDatabase", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetAbortPrimaryCatchUp" },
+      "value_path": ["replSetAbortPrimaryCatchUp", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetFreeze" },
+      "value_path": ["replSetFreeze", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetGetConfig" },
+      "value_path": ["replSetGetConfig", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetGetRBID" },
+      "value_path": ["replSetGetRBID", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetGetStatus" },
+      "value_path": ["replSetGetStatus", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetHeartbeat" },
+      "value_path": ["replSetHeartbeat", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetInitiate" },
+      "value_path": ["replSetInitiate", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetMaintenance" },
+      "value_path": ["replSetMaintenance", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetReconfig" },
+      "value_path": ["replSetReconfig", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetRequestVotes" },
+      "value_path": ["replSetRequestVotes", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetResizeOplog" },
+      "value_path": ["replSetResizeOplog", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetStepDown" },
+      "value_path": ["replSetStepDown", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetStepDownWithForce" },
+      "value_path": ["replSetStepDownWithForce", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetStepUp" },
+      "value_path": ["replSetStepUp", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetSyncFrom" },
+      "value_path": ["replSetSyncFrom", "total"]
+    },
+    {
+      "labels": { "cmd": "replSetUpdatePosition" },
+      "value_path": ["replSetUpdatePosition", "total"]
+    },
+    {
+      "labels": { "cmd": "resetError" },
+      "value_path": ["resetError", "total"]
+    },
+    {
+      "labels": { "cmd": "revokePrivilegesFromRole" },
+      "value_path": ["revokePrivilegesFromRole", "total"]
+    },
+    {
+      "labels": { "cmd": "revokeRolesFromRole" },
+      "value_path": ["revokeRolesFromRole", "total"]
+    },
+    {
+      "labels": { "cmd": "revokeRolesFromUser" },
+      "value_path": ["revokeRolesFromUser", "total"]
+    },
+    { "labels": { "cmd": "rolesInfo" }, "value_path": ["rolesInfo", "total"] },
+    {
+      "labels": { "cmd": "saslContinue" },
+      "value_path": ["saslContinue", "total"]
+    },
+    { "labels": { "cmd": "saslStart" }, "value_path": ["saslStart", "total"] },
+    {
+      "labels": { "cmd": "serverStatus" },
+      "value_path": ["serverStatus", "total"]
+    },
+    {
+      "labels": { "cmd": "setFeatureCompatibilityVersion" },
+      "value_path": ["setFeatureCompatibilityVersion", "total"]
+    },
+    {
+      "labels": { "cmd": "setFreeMonitoring" },
+      "value_path": ["setFreeMonitoring", "total"]
+    },
+    {
+      "labels": { "cmd": "setParameter" },
+      "value_path": ["setParameter", "total"]
+    },
+    {
+      "labels": { "cmd": "setShardVersion" },
+      "value_path": ["setShardVersion", "total"]
+    },
+    {
+      "labels": { "cmd": "shardConnPoolStats" },
+      "value_path": ["shardConnPoolStats", "total"]
+    },
+    {
+      "labels": { "cmd": "shardingState" },
+      "value_path": ["shardingState", "total"]
+    },
+    { "labels": { "cmd": "shutdown" }, "value_path": ["shutdown", "total"] },
+    {
+      "labels": { "cmd": "splitChunk" },
+      "value_path": ["splitChunk", "total"]
+    },
+    {
+      "labels": { "cmd": "splitVector" },
+      "value_path": ["splitVector", "total"]
+    },
+    {
+      "labels": { "cmd": "startRecordingTraffic" },
+      "value_path": ["startRecordingTraffic", "total"]
+    },
+    {
+      "labels": { "cmd": "startSession" },
+      "value_path": ["startSession", "total"]
+    },
+    {
+      "labels": { "cmd": "stopRecordingTraffic" },
+      "value_path": ["stopRecordingTraffic", "total"]
+    },
+    { "labels": { "cmd": "top" }, "value_path": ["top", "total"] },
+    { "labels": { "cmd": "touch" }, "value_path": ["touch", "total"] },
+    {
+      "labels": { "cmd": "unsetSharding" },
+      "value_path": ["unsetSharding", "total"]
+    },
+    { "labels": { "cmd": "update" }, "value_path": ["update", "total"] },
+    {
+      "labels": { "cmd": "updateRole" },
+      "value_path": ["updateRole", "total"]
+    },
+    {
+      "labels": { "cmd": "updateUser" },
+      "value_path": ["updateUser", "total"]
+    },
+    { "labels": { "cmd": "usersInfo" }, "value_path": ["usersInfo", "total"] },
+    { "labels": { "cmd": "validate" }, "value_path": ["validate", "total"] },
+    {
+      "labels": { "cmd": "voteCommitIndexBuild" },
+      "value_path": ["voteCommitIndexBuild", "total"]
+    },
+    {
+      "labels": { "cmd": "waitForFailPoint" },
+      "value_path": ["waitForFailPoint", "total"]
+    },
+    { "labels": { "cmd": "whatsmyuri" }, "value_path": ["whatsmyuri", "total"] }
+  ]
+}
