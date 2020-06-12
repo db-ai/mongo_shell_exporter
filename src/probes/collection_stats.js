@@ -1,13 +1,15 @@
 import Probe from 'src/probe.js'
 
-const _collectionStatusPipeline = [{
-  $collStats: {
-    storageStats: {},
-    latencyStats: {
-      histograms: true
+const _collectionStatusPipeline = [
+  {
+    $collStats: {
+      storageStats: {},
+      latencyStats: {
+        histograms: true
+      }
     }
   }
-}]
+]
 
 export default class CollectionStatsProbe extends Probe {
   static config (databaseName, collectionName) {
@@ -49,7 +51,11 @@ export default class CollectionStatsProbe extends Probe {
         const indexStat = { wiredTiger: indexDetails[indexName] }
         const indexLabels = Object.merge(labels, { idx: indexName })
 
-        this.bridge.consume('collectionStats.indexDetails', indexStat, indexLabels)
+        this.bridge.consume(
+          'collectionStats.indexDetails',
+          indexStat,
+          indexLabels
+        )
       }
     }
   }

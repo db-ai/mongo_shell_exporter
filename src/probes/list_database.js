@@ -7,7 +7,12 @@ export default class ListDatabaseProbe extends Probe {
     const response = this.runAdminCommand(_listDatabaseCommand)
 
     for (const database of response.databases) {
-      this.queueProbe(DatabaseStatsProbe, DatabaseStatsProbe.config(database.name))
+      if (this.bridge.registry.config.namespaceEnabled(database.name)) {
+        this.queueProbe(
+          DatabaseStatsProbe,
+          DatabaseStatsProbe.config(database.name)
+        )
+      }
     }
   }
 }

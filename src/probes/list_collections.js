@@ -7,10 +7,19 @@ export default class ListCollectionsProbe extends Probe {
   }
 
   execute () {
-    const colletionNames = this.getDatabase(this.config.databaseName).getCollectionNames()
+    const colletionNames = this.getDatabase(
+      this.config.databaseName
+    ).getCollectionNames()
 
     for (const collection of colletionNames) {
-      this.queueProbe(CollectionStatsProbe, CollectionStatsProbe.config(this.config.databaseName, collection))
+      const namespace = [this.config.databaseName, collection].join('.')
+
+      if (this.bridge.registry.config.namespaceEnabled(namespace)) {
+        this.queueProbe(
+          CollectionStatsProbe,
+          CollectionStatsProbe.config(this.config.databaseName, collection)
+        )
+      }
     }
   }
 }
