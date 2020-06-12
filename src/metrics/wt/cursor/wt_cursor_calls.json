@@ -40,7 +40,10 @@
           "labels": { "action": "insert" },
           "value_path": ["cursor insert calls"]
         },
-        { "labels": { "action": "modify" }, "value_path": ["cursor modify"] },
+        {
+          "labels": { "action": "modify" },
+          "value_path": ["cursor modify calls"]
+        },
         { "labels": { "action": "next" }, "value_path": ["cursor next calls"] },
         { "labels": { "action": "prev" }, "value_path": ["cursor prev calls"] },
         {
