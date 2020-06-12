@@ -11,9 +11,9 @@
   "map": [
     { "labels": { "type": "reads" }, "value_path": ["reads", "latency"] },
     { "labels": { "type": "writes" }, "value_path": ["writes", "latency"] },
-    { "labels": { "type": "commands" }, "value_path": ["update", "latency"] },
+    { "labels": { "type": "commands" }, "value_path": ["commands", "latency"] },
     {
-      "labels": { "type": "commands" },
+      "labels": { "type": "transactions" },
       "value_path": ["transactions", "latency"]
     }
   ]
