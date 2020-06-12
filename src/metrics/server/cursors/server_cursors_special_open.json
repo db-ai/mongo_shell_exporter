@@ -1,0 +1,15 @@
+{
+  "name": "server_cursors_special_open",
+  "type": "gauge",
+  "source": "serverStatus",
+
+  "help": "The number cursors with noTimeout or pinned flags that MongoDB is maintaining for clients",
+  "link": "https://docs.mongodb.com/manual/reference/command/serverStatus/#serverstatus.metrics.cursor.open",
+
+  "root": ["metrics", "cursor", "open"],
+
+  "map": [
+    { "labels": { "type": "noTimeout" }, "value_path": ["noTimeout"] },
+    { "labels": { "type": "pinned" }, "value_path": ["pinned"] }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "server_cursors_timedout",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "The total number of cursors that have timed out since the server process started. If this number is large or growing at a regular rate, this may indicate an application error",
+  "link": "https://docs.mongodb.com/manual/reference/command/serverStatus/#serverstatus.metrics.cursor.timedOut",
+
+  "root": ["metrics", "cursor"],
+
+  "map": [{ "labels": {}, "value_path": ["timedOut"] }]
+}

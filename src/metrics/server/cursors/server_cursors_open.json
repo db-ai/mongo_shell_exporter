@@ -1,0 +1,12 @@
+{
+  "name": "server_cursors_open",
+  "type": "gauge",
+  "source": "serverStatus",
+
+  "help": "The number cursors that MongoDB is maintaining for clients",
+  "link": "https://docs.mongodb.com/manual/reference/command/serverStatus/#serverstatus.metrics.cursor.open",
+
+  "root": ["metrics", "cursor", "open"],
+
+  "map": [{ "labels": {}, "value_path": ["total"] }]
+}
