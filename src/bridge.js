@@ -143,6 +143,9 @@ export default class Bridge {
           case NumberLong:
             returnValue = Number(value)
             break
+          case Date:
+            returnValue = value.getTime()
+            break
         }
 
         unsupported = true
