@@ -1,0 +1,10 @@
+{
+  "name": "server_time",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "map": [{ "labels": {}, "value_path": ["localTime"] }]
+}
