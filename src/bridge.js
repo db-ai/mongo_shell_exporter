@@ -12,9 +12,10 @@ export default class Bridge {
   }
 
   consume (source, object, labels = {}) {
-    const bridgeRuntime = new TimeMeter()
+    const runtime = new TimeMeter()
 
     const tree = this.parseTree[source]
+    const ourLabels = Object.assign({}, labels)
 
     if (tree === undefined) {
       const availableKeys = Object.keys(this.parseTree)
@@ -23,116 +24,95 @@ export default class Bridge {
     }
 
     const levelMetrics = {
-      keysSeen: this.registry.getMetric('bridge_keys_seen_total', {
-        source: source
-      }),
-      keysExported: this.registry.getMetric('bridge_keys_exported_total', {
-        source: source
-      })
+      keysSeen: this.getSourceMetric('bridge_keys_seen_total', source),
+      keysExported: this.getSourceMetric('bridge_keys_exported_total', source)
     }
 
-    this.processLevel(tree, object, labels, levelMetrics, source)
-
-    bridgeRuntime.stop()
-
-    this.registry
-      .getMetric('bridge_runtime_seconds', { source: source })
-      .inc(bridgeRuntime.runtimeSeconds)
-    this.registry.getMetric('bridge_runs_total', { source: source }).inc()
-  }
-
-  processLevel (
-    currentTree,
-    currentObject,
-    labels,
-    levelMetrics,
-    source,
-    currentPath = []
-  ) {
-    // if (currentTree === undefined) return
-    const treeVisitedKeys = []
-
-    for (const key in currentObject) {
-      levelMetrics.keysSeen.inc()
-
-      if (Object.prototype.hasOwnProperty.call(currentObject, key)) {
-        if (Object.prototype.hasOwnProperty.call(currentTree, key)) {
-          const currentValue = currentObject[key]
-          const currentTreeValue = currentTree[key]
-          let visited = false
-
-          if (currentValue.constructor.name === 'Object') {
-            this.processLevel(
-              currentTreeValue,
-              currentValue,
-              labels,
-              levelMetrics,
-              source,
-              currentPath.concat(key)
-            )
-
-            // Consider [Object] keys as visited
-            visited = true
-          }
-
-          if (
-            currentTreeValue !== undefined &&
-            typeof currentTreeValue.callback === 'function'
-          ) {
-            const [, value] = this.normalizedValue(currentValue)
-            //  function (sourceValue, sourceLabels = {})
-            currentTreeValue.callback(value, labels)
-
-            levelMetrics.keysExported.inc()
-            visited = true
-          }
-
-          if (visited) {
-            treeVisitedKeys.push(key)
-            delete currentObject[key]
-          }
-        }
-      }
+    const meta = {
+      labels: ourLabels,
+      metrics: levelMetrics,
+      source: source
     }
 
-    this.exportUnprocessed(
-      source,
-      currentPath,
-      currentObject,
-      currentTree,
-      treeVisitedKeys
-    )
+    this.processLevel(tree, object, meta)
+
+    runtime.stop()
+    const runtimeSeconds = runtime.runtimeSeconds
+
+    this.getSourceMetric('bridge_runtime_seconds', source).inc(runtimeSeconds)
+    this.getSourceMetric('bridge_runs_total', source).inc()
   }
 
-  exportUnprocessed (source, currentPath, object, tree, treeVisits) {
+  getSourceMetric (name, source) {
+    const labels = { source: source }
+    return this.registry.getMetric(name, labels)
+  }
+
+  processLevel (tree, object, meta, path = []) {
+    const visitedKeys = []
+
+    for (const key in object) {
+      this.processKey(tree, object, meta, key, path, visitedKeys)
+    }
+
+    this.exportUnprocessed(meta, path, object, tree, visitedKeys)
+  }
+
+  processKey (tree, object, meta, key, path, visitedKeys) {
+    meta.metrics.keysSeen.inc()
+
+    const hasKey = Object.prototype.hasOwnProperty
+    if (!hasKey.call(object, key) || !hasKey.call(tree, key)) {
+      return
+    }
+
+    const value = object[key]
+    const treeValue = tree[key] || {}
+    let visited = false
+
+    if (value.constructor.name === 'Object') {
+      this.processLevel(treeValue, value, meta, path.concat(key))
+
+      // Consider [Object] keys as visited
+      visited = true
+    }
+
+    if (typeof treeValue.callback === 'function') {
+      const [, metricValue] = this.normalizedValue(value)
+      const labels = Object.assign({}, meta.labels)
+      treeValue.callback(metricValue, labels)
+
+      meta.metrics.keysExported.inc()
+      visited = true
+    }
+
+    if (visited) {
+      visitedKeys.push(key)
+      delete object[key]
+    }
+  }
+
+  exportUnprocessed (meta, path, object, tree, treeVisits) {
+    const source = meta.source
+
     const objectKeys = Object.keys(object)
     const treeKeys = Object.keys(tree)
+
     const unvisitedObjectKeys = objectKeys.filter(x => !treeVisits.includes(x))
     const unvisitedTreeKeys = treeKeys.filter(x => !treeVisits.includes(x))
 
-    for (const objectKey of unvisitedObjectKeys) {
-      this.countUnvisited(
-        'bridge_keys_unknown_total',
-        currentPath,
-        source,
-        objectKey
-      )
+    for (const key of unvisitedObjectKeys) {
+      this.countUnvisited('bridge_keys_unknown_total', path, source, key)
     }
 
-    for (const treeKey of unvisitedTreeKeys) {
-      const metricName = tree[treeKey].name
-      this.countUnvisited(
-        'bridge_keys_missed_total',
-        currentPath,
-        source,
-        treeKey,
-        { metric: metricName }
-      )
+    for (const key of unvisitedTreeKeys) {
+      const labels = { metric: tree[key].name }
+      this.countUnvisited('bridge_keys_missed_total', path, source, key, labels)
     }
   }
 
-  countUnvisited (metric, currentPath, source, key, labels = {}) {
-    const unknownPath = currentPath.concat(key).join('.')
+  countUnvisited (metric, path, source, key, labels = {}) {
+    const unknownPath = path.concat(key).join('.')
     const defaultLabels = {
       source: source,
       path: unknownPath
