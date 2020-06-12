@@ -1,15 +1,19 @@
+import TimeMeter from 'src/time_meter'
+
 import console from 'src/utils/console.js'
 
 import Collector from 'src/collector.js'
 import Bridge from 'src/bridge.js'
 import Exporter from 'src/exporter.js'
 import Registry from 'src/registry.js'
+
 const exporterPackage = require('../package.json')
 
 require('src/metrics/all.js')
 require('src/probes/server_status.js')
 
 try {
+  const runtime = new TimeMeter()
   const registry = new Registry()
   const bridge = new Bridge(registry)
   const exporter = new Exporter(registry)
@@ -30,6 +34,9 @@ try {
       exporterPackage.version
     }", shell="${version()}"} 1`
   )
+
+  print('# TYPE mongodb_shell_exporter_runtime_seconds gauge')
+  print(`mongodb_shell_exporter_runtime_seconds ${runtime.runtimeSeconds}`)
 
   print('# TYPE mongodb_shell_exporter_ok gauge')
   print('mongodb_shell_exporter_ok 1')
