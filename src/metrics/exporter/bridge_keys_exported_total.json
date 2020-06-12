@@ -3,5 +3,7 @@
   "type": "gauge",
 
   "help": "",
-  "link": ""
+  "link": "",
+
+  "internal": true
 }
