@@ -1,0 +1,18 @@
+{
+  "name": "server_net_secure_connections",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "root": ["transportSecurity"],
+
+  "map": [
+    { "labels": { "version": "1.0" }, "value_path": ["1.0"] },
+    { "labels": { "version": "1.1" }, "value_path": ["1.1"] },
+    { "labels": { "version": "1.2" }, "value_path": ["1.2"] },
+    { "labels": { "version": "1.3" }, "value_path": ["1.3"] },
+    { "labels": { "version": "unknown" }, "value_path": ["unknown"] }
+  ]
+}
