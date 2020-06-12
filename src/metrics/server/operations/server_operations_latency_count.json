@@ -1,0 +1,20 @@
+{
+  "name": "server_operations_latency_count",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "Count of all latencies per request type for the instance as a whole",
+  "link": "https://docs.mongodb.com/manual/reference/command/serverStatus/#serverstatus.opLatencies",
+
+  "root": ["opLatencies"],
+
+  "map": [
+    { "labels": { "type": "reads" }, "value_path": ["reads", "ops"] },
+    { "labels": { "type": "writes" }, "value_path": ["writes", "ops"] },
+    { "labels": { "type": "commands" }, "value_path": ["update", "ops"] },
+    {
+      "labels": { "type": "commands" },
+      "value_path": ["transactions", "ops"]
+    }
+  ]
+}

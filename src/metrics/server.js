@@ -1,6 +1,7 @@
 import Registry from 'src/registry.js'
 
 require('src/metrics/server/net')
+require('src/metrics/server/operations')
 require('src/metrics/server/transactions')
 
 Registry.createMetric(require('src/metrics/server/server_info.json'))

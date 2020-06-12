@@ -1,0 +1,19 @@
+{
+  "name": "server_operations_replicated",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "Operations replicated by database by type since the mongod instance last started",
+  "link": "https://docs.mongodb.com/manual/reference/command/serverStatus/#serverstatus.opcountersRepl",
+
+  "root": ["opcountersRepl"],
+
+  "map": [
+    { "labels": { "type": "insert" }, "value_path": ["insert"] },
+    { "labels": { "type": "query" }, "value_path": ["query"] },
+    { "labels": { "type": "update" }, "value_path": ["update"] },
+    { "labels": { "type": "delete" }, "value_path": ["delete"] },
+    { "labels": { "type": "getmore" }, "value_path": ["getmore"] },
+    { "labels": { "type": "command" }, "value_path": ["command"] }
+  ]
+}

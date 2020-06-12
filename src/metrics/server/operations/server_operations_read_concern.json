@@ -1,0 +1,19 @@
+{
+  "name": "server_operations_read_concern",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "Read concern level specified by query operations to the mongod instance since it last started",
+  "link": "https://docs.mongodb.com/manual/reference/command/serverStatus/#serverstatus.opReadConcernCounters",
+
+  "root": ["opReadConcernCounters"],
+
+  "map": [
+    { "labels": { "w": "available" }, "value_path": ["available"] },
+    { "labels": { "w": "linearizable" }, "value_path": ["linearizable"] },
+    { "labels": { "w": "local" }, "value_path": ["local"] },
+    { "labels": { "w": "majority" }, "value_path": ["majority"] },
+    { "labels": { "w": "snapshot" }, "value_path": ["snapshot"] },
+    { "labels": { "w": "none" }, "value_path": ["none"] }
+  ]
+}

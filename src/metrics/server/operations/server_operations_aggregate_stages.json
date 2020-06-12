@@ -1,0 +1,59 @@
+{
+  "name": "server_operations_aggregate_stages",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "Number of time each aggegation piple stage has been executed",
+  "link": "https://docs.mongodb.com/manual/reference/command/serverStatus/#serverstatus.metrics.aggStageCounters",
+
+  "root": ["metrics", "aggStageCounters"],
+
+  "map": [
+    {
+      "labels": { "stage": "$_internalInhibitOptimization" },
+      "value_path": ["$_internalInhibitOptimization"]
+    },
+    {
+      "labels": { "stage": "$_internalSplitPipeline" },
+      "value_path": ["$_internalSplitPipeline"]
+    },
+    { "labels": { "stage": "$addFields" }, "value_path": ["$addFields"] },
+    { "labels": { "stage": "$bucket" }, "value_path": ["$bucket"] },
+    { "labels": { "stage": "$bucketAuto" }, "value_path": ["$bucketAuto"] },
+    { "labels": { "stage": "$changeStream" }, "value_path": ["$changeStream"] },
+    { "labels": { "stage": "$collStats" }, "value_path": ["$collStats"] },
+    { "labels": { "stage": "$count" }, "value_path": ["$count"] },
+    { "labels": { "stage": "$currentOp" }, "value_path": ["$currentOp"] },
+    { "labels": { "stage": "$facet" }, "value_path": ["$facet"] },
+    { "labels": { "stage": "$geoNear" }, "value_path": ["$geoNear"] },
+    { "labels": { "stage": "$graphLookup" }, "value_path": ["$graphLookup"] },
+    { "labels": { "stage": "$group" }, "value_path": ["$group"] },
+    { "labels": { "stage": "$indexStats" }, "value_path": ["$indexStats"] },
+    { "labels": { "stage": "$limit" }, "value_path": ["$limit"] },
+    {
+      "labels": { "stage": "$listLocalSessions" },
+      "value_path": ["$listLocalSessions"]
+    },
+    { "labels": { "stage": "$listSessions" }, "value_path": ["$listSessions"] },
+    { "labels": { "stage": "$lookup" }, "value_path": ["$lookup"] },
+    { "labels": { "stage": "$match" }, "value_path": ["$match"] },
+    { "labels": { "stage": "$merge" }, "value_path": ["$merge"] },
+    { "labels": { "stage": "$mergeCursors" }, "value_path": ["$mergeCursors"] },
+    { "labels": { "stage": "$out" }, "value_path": ["$out"] },
+    {
+      "labels": { "stage": "$planCacheStats" },
+      "value_path": ["$planCacheStats"]
+    },
+    { "labels": { "stage": "$project" }, "value_path": ["$project"] },
+    { "labels": { "stage": "$redact" }, "value_path": ["$redact"] },
+    { "labels": { "stage": "$replaceRoot" }, "value_path": ["$replaceRoot"] },
+    { "labels": { "stage": "$replaceWith" }, "value_path": ["$replaceWith"] },
+    { "labels": { "stage": "$sample" }, "value_path": ["$sample"] },
+    { "labels": { "stage": "$set" }, "value_path": ["$set"] },
+    { "labels": { "stage": "$skip" }, "value_path": ["$skip"] },
+    { "labels": { "stage": "$sort" }, "value_path": ["$sort"] },
+    { "labels": { "stage": "$sortByCount" }, "value_path": ["$sortByCount"] },
+    { "labels": { "stage": "$unset" }, "value_path": ["$unset"] },
+    { "labels": { "stage": "$unwind" }, "value_path": ["$unwind"] }
+  ]
+}
