@@ -1,0 +1,17 @@
+{
+  "name": "server_transactions_collection_writes",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "root": ["transactions"],
+
+  "map": [
+    {
+      "labels": {},
+      "value_path": ["transactionsCollectionWriteCount"]
+    }
+  ]
+}

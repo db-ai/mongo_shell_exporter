@@ -20,3 +20,16 @@ Registry.createMetric(
 Registry.createMetric(
   require('src/metrics/server/net/server_net_sent_bytes_total.json')
 )
+
+Registry.createMetric(
+  require('src/metrics/server/transactions/server_transactions_collection_writes.json')
+)
+Registry.createMetric(
+  require('src/metrics/server/transactions/server_transactions_current.json')
+)
+Registry.createMetric(
+  require('src/metrics/server/transactions/server_transactions_retried.json')
+)
+Registry.createMetric(
+  require('src/metrics/server/transactions/server_transactions_total.json')
+)

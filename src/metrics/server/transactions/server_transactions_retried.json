@@ -1,0 +1,21 @@
+{
+  "name": "server_transactions_retried",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "root": ["transactions"],
+
+  "map": [
+    {
+      "labels": { "state": "commands" },
+      "value_path": ["retriedCommandsCount"]
+    },
+    {
+      "labels": { "state": "statements" },
+      "value_path": ["retriedStatementsCount"]
+    }
+  ]
+}

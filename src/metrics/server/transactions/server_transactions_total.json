@@ -1,0 +1,25 @@
+{
+  "name": "server_transactions_total",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "root": ["transactions"],
+
+  "map": [
+    { "labels": { "state": "aborted" }, "value_path": ["totalAborted"] },
+    { "labels": { "state": "commited" }, "value_path": ["totalCommitted"] },
+    { "labels": { "state": "started" }, "value_path": ["totalStarted"] },
+    { "labels": { "state": "prepared" }, "value_path": ["totalPrepared"] },
+    {
+      "labels": { "state": "prepared then commited" },
+      "value_path": ["totalPreparedThenCommitted"]
+    },
+    {
+      "labels": { "state": "prepared then aborted" },
+      "value_path": ["totalPreparedThenAborted"]
+    }
+  ]
+}
