@@ -1,0 +1,18 @@
+{
+  "name": "server_log_asserts",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "root": ["asserts"],
+
+  "map": [
+    { "labels": { "level": "regular" }, "value_path": ["regular"] },
+    { "labels": { "level": "warning" }, "value_path": ["warning"] },
+    { "labels": { "level": "msg" }, "value_path": ["msg"] },
+    { "labels": { "level": "user" }, "value_path": ["user"] },
+    { "labels": { "level": "rollovers" }, "value_path": ["rollovers"] }
+  ]
+}
