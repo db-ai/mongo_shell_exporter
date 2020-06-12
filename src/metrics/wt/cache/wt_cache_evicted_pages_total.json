@@ -1,43 +1,42 @@
 {
-  "sources": [
-    "serverStatus"
-  ],
   "name": "wt_cache_evicted_pages_total",
   "type": "counter",
-  "map": [
+  "map_groups": [
     {
-      "labels": {},
-      "value_path": [
-        "internal pages evicted"
+      "sources": [
+        "serverStatus",
+        "collectionStats.storageStats",
+        "collectionStats.indexDetails"
+      ],
+      "map": [
+        {
+          "labels": { "type": "internal" },
+          "value_path": ["internal pages evicted"]
+        },
+        {
+          "labels": { "type": "modified" },
+          "value_path": ["modified pages evicted"]
+        },
+        {
+          "labels": { "type": "unmodified" },
+          "value_path": ["unmodified pages evicted"]
+        }
       ]
     },
     {
-      "labels": {},
-      "value_path": [
-        "modified pages evicted by application threads"
-      ]
-    },
-    {
-      "labels": {},
-      "value_path": [
-        "modified pages evicted"
-      ]
-    },
-    {
-      "labels": {},
-      "value_path": [
-        "pages evicted by application threads"
-      ]
-    },
-    {
-      "labels": {},
-      "value_path": [
-        "unmodified pages evicted"
+      "sources": ["serverStatus"],
+      "map": [
+        {
+          "labels": { "type": "by app threads, modified" },
+          "value_path": ["modified pages evicted by application threads"]
+        },
+
+        {
+          "labels": { "type": "by app threads" },
+          "value_path": ["pages evicted by application threads"]
+        }
       ]
     }
   ],
-  "root": [
-    "wiredTiger",
-    "cache"
-  ]
+  "root": ["wiredTiger", "cache"]
 }
