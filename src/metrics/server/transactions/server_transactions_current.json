@@ -11,7 +11,7 @@
   "map": [
     { "labels": { "state": "active" }, "value_path": ["currentActive"] },
     { "labels": { "state": "inactive" }, "value_path": ["currentInactive"] },
-    { "labels": { "state": "open" }, "value_path": ["currentInactive"] },
+    { "labels": { "state": "open" }, "value_path": ["currentOpen"] },
     { "labels": { "state": "prepared" }, "value_path": ["currentPrepared"] }
   ]
 }
