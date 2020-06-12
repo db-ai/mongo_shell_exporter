@@ -1,0 +1,13 @@
+{
+  "name": "server_uptime",
+  "type": "counter",
+  "source": "serverStatus",
+
+  "help": "",
+  "link": "",
+
+  "map": [
+    { "labels": {}, "value_path": ["uptime"] },
+    { "labels": { "type": "estimate" }, "value_path": ["uptimeEstimate"] }
+  ]
+}
